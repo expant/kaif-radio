@@ -1,6 +1,7 @@
 import { GenreTags } from '../../features/genre-filter/GenreTags';
 import { StationList } from '../../widgets/station-list/StationList';
 import { Player } from '../../widgets/player/Player';
+import { Pagination } from '../../features/station-pagination/Pagination';
 import { useRadioPage } from './useRadioPage';
 import styles from './RadioPage.module.css';
 
@@ -15,6 +16,10 @@ export const RadioPage = () => {
 		likedIds,
 		accentColor,
 		handleLike,
+		page,
+		totalPages,
+		totalCount,
+		setPage,
 	} = useRadioPage();
 
 	return (
@@ -31,7 +36,7 @@ export const RadioPage = () => {
 					</div>
 				</div>
 				<div className={styles.stat}>
-					<div className={styles.statNum}>{stations.length}</div>
+					<div className={styles.statNum}>{totalCount}</div>
 					<div className={styles.statLbl}>станций в эфире</div>
 				</div>
 			</header>
@@ -53,6 +58,11 @@ export const RadioPage = () => {
 						likedIds={likedIds}
 						onSelect={player.play}
 						onLike={handleLike}
+					/>
+					<Pagination
+						page={page}
+						totalPages={totalPages}
+						onPageChange={setPage}
 					/>
 				</main>
 

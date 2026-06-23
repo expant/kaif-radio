@@ -1,12 +1,15 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { usePlayer } from '../../widgets/player/usePlayer';
 import { useStations } from '../../shared/hooks/useStations';
+import { usePagination } from '../../features/station-pagination/usePagination';
 import { getStationColorHex } from '../../shared/utils/stationColor';
 
 export const useRadioPage = () => {
 	const [genre, setGenre] = useState('lofi');
 	const [likedIds, setLikedIds] = useState<Set<string>>(new Set());
-	const { stations, loading, error } = useStations(genre);
+
+	const { page, totalPages, totalCount, setPage } = usePagination(genre);
+	const { stations, loading, error } = useStations(genre, page);
 	const player = usePlayer();
 
 	const currentIndex = player.currentStation
@@ -14,13 +17,8 @@ export const useRadioPage = () => {
 				(s) => s.stationuuid === player.currentStation!.stationuuid,
 			)
 		: -1;
-	const accentColor = getStationColorHex(
-		currentIndex === -1 ? 0 : currentIndex,
-	);
 
-	useEffect(() => {
-		console.log('Stations updated:', stations);
-	}, [stations]);
+	const accentColor = getStationColorHex(currentIndex === -1 ? 0 : currentIndex);
 
 	const handleLike = (stationId: string) => {
 		setLikedIds((prev) => {
@@ -41,5 +39,9 @@ export const useRadioPage = () => {
 		likedIds,
 		accentColor,
 		handleLike,
+		page,
+		totalPages,
+		totalCount,
+		setPage,
 	};
 };
