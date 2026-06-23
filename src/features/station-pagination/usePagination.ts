@@ -8,17 +8,20 @@ export const usePagination = (tag: string) => {
 	const [totalCount, setTotalCount] = useState(0);
 
 	useEffect(() => {
-		setPage(1);
+		const load = async () => {
+			setPage(1);
 
-		fetchStationCount(tag)
-			.then((count) => {
+			try {
+				const count = await fetchStationCount(tag);
 				setTotalCount(count);
 				setTotalPages(Math.max(1, Math.ceil(count / PAGE_SIZE)));
-			})
-			.catch(() => {
+			} catch {
 				setTotalCount(0);
 				setTotalPages(1);
-			});
+			}
+		};
+
+		load();
 	}, [tag]);
 
 	return { page, totalPages, totalCount, setPage };

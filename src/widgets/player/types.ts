@@ -4,8 +4,9 @@ export type PlayerState = {
   currentStation: Station | null;
   isPlaying: boolean;
   volume: number;
+  playError: string | null;
   setVolume: (v: number) => void;
-  play: (station: Station) => void;
+  play: (station: Station) => Promise<void>;
   stop: () => void;
 };
 

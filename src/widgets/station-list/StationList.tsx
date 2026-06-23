@@ -2,6 +2,7 @@ import { getStationColor, getInitial } from '../../shared/utils/stationColor';
 import { IconHeart } from '../../shared/ui/icons/IconHeart';
 import { IconPlay } from '../../shared/ui/icons/IconPlay';
 import { IconPause } from '../../shared/ui/icons/IconPause';
+import { ErrorMessage } from '../../shared/ui/ErrorMessage/ErrorMessage';
 import type { StationListProps } from './types';
 import styles from './StationList.module.css';
 
@@ -26,9 +27,10 @@ export const StationList = ({
 
 	if (error) {
 		return (
-			<div className={styles.state}>
-				<span className={styles.error}>Ошибка: {error}</span>
-			</div>
+			<ErrorMessage
+				message="что-то пошло не так со станциями"
+				hint="попробуй обновить страницу или вернуться чуть позже"
+			/>
 		);
 	}
 

@@ -8,13 +8,21 @@ export const useStations = (tag: string, page: number) => {
 	const [error, setError] = useState<string | null>(null);
 
 	useEffect(() => {
-		setLoading(true);
-		setError(null);
+		const load = async () => {
+			setLoading(true);
+			setError(null);
 
-		fetchStationsByTag(tag, page)
-			.then(setStations)
-			.catch((e: Error) => setError(e.message))
-			.finally(() => setLoading(false));
+			try {
+				const data = await fetchStationsByTag(tag, page);
+				setStations(data);
+			} catch (e) {
+				setError((e as Error).message);
+			} finally {
+				setLoading(false);
+			}
+		};
+
+		load();
 	}, [tag, page]);
 
 	return { stations, loading, error };

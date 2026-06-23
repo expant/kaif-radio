@@ -7,7 +7,15 @@ import { Wave } from '../../shared/ui/Wave/Wave';
 import styles from './Player.module.css';
 
 export const Player = ({ player, accentColor }: PlayerProps) => {
-	const { currentStation, isPlaying, volume, setVolume, play, stop } = player;
+	const {
+		currentStation,
+		isPlaying,
+		volume,
+		playError,
+		setVolume,
+		play,
+		stop,
+	} = player;
 
 	const handlePlayPause = () => {
 		if (!currentStation) return;
@@ -42,11 +50,13 @@ export const Player = ({ player, accentColor }: PlayerProps) => {
 					{currentStation ? currentStation.name : 'kaifradio'}
 				</div>
 				<div className={styles.sub}>
-					{currentStation
-						? isPlaying
-							? `${currentStation.country} · live`
-							: 'на паузе'
-						: 'выбери станцию из списка'}
+					{playError
+						? playError
+						: currentStation
+							? isPlaying
+								? `${currentStation.country} · live`
+								: 'на паузе'
+							: 'выбери станцию из списка'}
 				</div>
 			</div>
 
