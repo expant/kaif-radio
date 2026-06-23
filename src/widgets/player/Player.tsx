@@ -1,9 +1,9 @@
 import type { PlayerProps } from './types';
-import { getInitial } from '../../shared/utils/stationColor';
 import { IconPlay } from '../../shared/ui/icons/IconPlay';
 import { IconPause } from '../../shared/ui/icons/IconPause';
 import { IconVolume } from '../../shared/ui/icons/IconVolume';
 import { Wave } from '../../shared/ui/Wave/Wave';
+import { StationAvatar } from '../../shared/ui/StationAvatar/StationAvatar';
 import styles from './Player.module.css';
 
 export const Player = ({ player, accentColor }: PlayerProps) => {
@@ -42,7 +42,16 @@ export const Player = ({ player, accentColor }: PlayerProps) => {
 			</div>
 
 			<div className={styles.art}>
-				{currentStation ? getInitial(currentStation.name) : '♪'}
+				{currentStation ? (
+					<StationAvatar
+						name={currentStation.name}
+						favicon={currentStation.favicon}
+						color={accentColor}
+						variant="art"
+					/>
+				) : (
+					<span>&#9834;</span>
+				)}
 			</div>
 
 			<div className={styles.info}>

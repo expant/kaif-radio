@@ -1,0 +1,29 @@
+.avatar {
+	width: 100%;
+	height: 100%;
+	display: grid;
+	place-items: center;
+	overflow: hidden;
+}
+
+/* ── tile (station list) ── */
+.imageTile {
+	width: 100%;
+	height: 100%;
+	object-fit: cover;
+}
+
+/* ── art (player) ── */
+.imageArt {
+	width: 100%;
+	height: 100%;
+	object-fit: cover;
+}
+
+.initial {
+	color: rgba(255, 255, 255, 0.92);
+	font-family: 'Bricolage Grotesque', 'Onest', sans-serif;
+	font-weight: 800;
+	letter-spacing: -0.03em;
+	font-size: inherit;
+}
