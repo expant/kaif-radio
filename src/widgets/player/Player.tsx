@@ -46,7 +46,10 @@ export const Player = ({ player, accentColor }: PlayerProps) => {
 			</div>
 
 			<div className={styles.info}>
-				<div className={styles.name}>
+				<div
+					className={styles.name}
+					title={currentStation?.name}
+				>
 					{currentStation ? currentStation.name : 'kaifradio'}
 				</div>
 				<div className={styles.sub}>
