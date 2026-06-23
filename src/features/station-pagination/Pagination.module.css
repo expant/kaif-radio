@@ -1,0 +1,48 @@
+.pagination {
+	display: flex;
+	align-items: center;
+	gap: 6px;
+	flex-wrap: wrap;
+	margin-top: 24px;
+}
+
+.page,
+.edge {
+	font-family: 'Bricolage Grotesque', 'Onest', sans-serif;
+	font-weight: 700;
+	font-size: 15px;
+	min-width: 40px;
+	height: 40px;
+	border-radius: 999px;
+	border: 2px solid var(--line);
+	background: var(--card);
+	color: var(--ink);
+	cursor: pointer;
+	display: grid;
+	place-items: center;
+	transition: transform 0.12s ease, border-color 0.12s ease, background 0.12s ease;
+}
+
+.page:hover:not(.active),
+.edge:hover:not(:disabled) {
+	border-color: var(--ink);
+	transform: translateY(-2px);
+}
+
+.page.active {
+	background: var(--ink);
+	color: var(--paper);
+	border-color: var(--ink);
+}
+
+.edge:disabled {
+	opacity: 0.3;
+	cursor: default;
+}
+
+.dots {
+	font-size: 15px;
+	font-weight: 700;
+	color: var(--ink-soft);
+	padding: 0 4px;
+}
