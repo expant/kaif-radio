@@ -1,0 +1,9 @@
+{
+  "permissions": {
+    "allow": [
+      "mcp__Claude_Preview__preview_start",
+      "Read(//c/Users/elaginay/Downloads/**)",
+      "Bash(unzip -o \"Shader wallpapers-handoff.zip\" -d \"kaifradio-design\")"
+    ]
+  }
+}
