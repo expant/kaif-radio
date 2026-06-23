@@ -10,7 +10,7 @@ export const fetchStationsByTag = async (
 	const offset = (page - 1) * PAGE_SIZE;
 
 	const response = await fetch(
-		`${baseUrl}/stations/bytag/${encodeURIComponent(tag)}?limit=${PAGE_SIZE}&offset=${offset}&hidebroken=true&order=votes`,
+		`${baseUrl}/stations/bytag/${encodeURIComponent(tag)}?limit=${PAGE_SIZE}&offset=${offset}&hidebroken=true&order=votes&reverse=true`,
 		{ signal: AbortSignal.timeout(8000) },
 	);
 
