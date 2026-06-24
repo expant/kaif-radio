@@ -30,7 +30,7 @@ export const AddGenreForm = ({ validating, onAdd }: AddGenreFormProps) => {
 
 	return (
 		<button className={styles.addBtn} onClick={handleOpen}>
-			м{validating ? '...' : '+ добавить'}
+			{validating ? '...' : '+ добавить'}
 		</button>
 	);
 };
