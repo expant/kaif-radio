@@ -119,33 +119,15 @@
 	font-size: 12px;
 }
 
-.like {
+.votes {
 	display: flex;
 	align-items: center;
-	gap: 6px;
-	border: none;
-	background: transparent;
-	cursor: pointer;
+	gap: 4px;
 	font-family: 'Space Grotesk', 'Onest', sans-serif;
-	font-weight: 700;
-	font-size: 14px;
+	font-weight: 600;
+	font-size: 13px;
 	color: var(--ink-soft);
-	padding: 6px;
-	transition: color 0.15s ease;
-}
-
-.like svg {
-	width: 18px;
-	height: 18px;
-	transition: transform 0.15s ease;
-}
-
-.like:hover svg {
-	transform: scale(1.2);
-}
-
-.like.liked {
-	color: var(--coral);
+	white-space: nowrap;
 }
 
 .playBtn {

@@ -15,9 +15,7 @@ export const RadioPage = () => {
 		loading,
 		error,
 		player,
-		likedIds,
 		accentColor,
-		handleLike,
 		page,
 		totalPages,
 		totalCount,
@@ -73,9 +71,7 @@ export const RadioPage = () => {
 						error={error}
 						currentStationId={player.currentStation?.stationuuid ?? null}
 						isPlaying={player.isPlaying}
-						likedIds={likedIds}
 						onSelect={player.play}
-						onLike={handleLike}
 					/>
 
 					<Pagination page={page} totalPages={totalPages} onPageChange={setPage} />

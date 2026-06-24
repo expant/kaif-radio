@@ -7,7 +7,6 @@ import { getStationColorHex } from '../../../../shared/utils/stationColor';
 
 export const useRadioPage = () => {
 	const [genre, setGenre] = useState('lofi');
-	const [likedIds, setLikedIds] = useState<Set<string>>(new Set());
 
 	const { genres, validating, validationError, addGenre, removeGenre, clearError } = useGenres();
 	const { page, totalPages, totalCount, setPage } = usePagination(genre);
@@ -20,15 +19,6 @@ export const useRadioPage = () => {
 
 	const accentColor = getStationColorHex(currentIndex === -1 ? 0 : currentIndex);
 
-	const handleLike = (stationId: string) => {
-		setLikedIds((prev) => {
-			const next = new Set(prev);
-			if (next.has(stationId)) next.delete(stationId);
-			else next.add(stationId);
-			return next;
-		});
-	};
-
 	return {
 		genre,
 		setGenre,
@@ -36,9 +26,7 @@ export const useRadioPage = () => {
 		loading,
 		error,
 		player,
-		likedIds,
 		accentColor,
-		handleLike,
 		page,
 		totalPages,
 		totalCount,

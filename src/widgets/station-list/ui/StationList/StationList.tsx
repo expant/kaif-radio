@@ -1,7 +1,7 @@
 import type { CSSProperties } from 'react';
 import { getStationColor } from '../../../../shared/utils/stationColor';
-import { IconHeart } from '../../../../shared/ui/icons/IconHeart';
 import { IconPlay } from '../../../../shared/ui/icons/IconPlay';
+import { IconListeners } from '../../../../shared/ui/icons/IconListeners';
 import { IconPause } from '../../../../shared/ui/icons/IconPause';
 import { ErrorMessage } from '../../../../shared/ui/ErrorMessage/ErrorMessage';
 import { StationAvatar } from '../../../../shared/ui/StationAvatar/StationAvatar';
@@ -14,9 +14,7 @@ export const StationList = ({
 	error,
 	currentStationId,
 	isPlaying,
-	likedIds,
 	onSelect,
-	onLike,
 }: StationListProps) => {
 	if (loading) {
 		return (
@@ -48,7 +46,6 @@ export const StationList = ({
 		<ul className={styles.list}>
 			{stations.map((station, index) => {
 				const isActive = station.stationuuid === currentStationId;
-				const isLiked = likedIds.has(station.stationuuid);
 				const color = getStationColor(index);
 
 				return (
@@ -71,17 +68,12 @@ export const StationList = ({
 							</div>
 						</div>
 
-						<button
-							className={`${styles.like} ${isLiked ? styles.liked : ''}`}
-							onClick={(e) => {
-								e.stopPropagation();
-								onLike(station.stationuuid);
-							}}
-							aria-label="Лайк"
-						>
-							<IconHeart filled={isLiked} />
-							<span>{station.votes}</span>
-						</button>
+						{station.votes > 0 && (
+							<span className={styles.votes}>
+								<IconListeners size={14} />
+								{station.votes}
+							</span>
+						)}
 
 						<button
 							className={styles.playBtn}
