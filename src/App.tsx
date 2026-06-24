@@ -1,7 +1,7 @@
-import { RadioPage } from "./pages/radio/RadioPage";
+import { RadioPage } from './pages/radio/RadioPage';
 
 function App() {
-  return <RadioPage />;
+	return <RadioPage />;
 }
 
 export default App;

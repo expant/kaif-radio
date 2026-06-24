@@ -1,12 +1,8 @@
-import type { PaginationProps } from './types';
-import { getPageRange } from './getPageRange';
+import type { PaginationProps } from '../../model/types';
+import { getPageRange } from '../../model/getPageRange';
 import styles from './Pagination.module.css';
 
-export const Pagination = ({
-	page,
-	totalPages,
-	onPageChange,
-}: PaginationProps) => {
+export const Pagination = ({ page, totalPages, onPageChange }: PaginationProps) => {
 	if (totalPages <= 1) return null;
 
 	const pages = getPageRange(page, totalPages);
@@ -17,7 +13,7 @@ export const Pagination = ({
 				className={styles.edge}
 				onClick={() => onPageChange(1)}
 				disabled={page === 1}
-				aria-label='Первая страница'
+				aria-label="Первая страница"
 			>
 				«
 			</button>
@@ -42,7 +38,7 @@ export const Pagination = ({
 				className={styles.edge}
 				onClick={() => onPageChange(totalPages)}
 				disabled={page === totalPages}
-				aria-label='Последняя страница'
+				aria-label="Последняя страница"
 			>
 				»
 			</button>

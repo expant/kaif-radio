@@ -1,0 +1,110 @@
+.container {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 10px;
+	align-items: center;
+}
+
+.tag {
+	display: inline-flex;
+	align-items: center;
+	border-radius: 999px;
+	border: 2px solid var(--ink);
+	overflow: hidden;
+	transition:
+		transform 0.12s ease,
+		background 0.15s ease;
+}
+
+.tag:hover {
+	transform: translateY(-2px);
+}
+
+.tag.active {
+	background: var(--ink);
+}
+
+.label {
+	font-family: 'Bricolage Grotesque', 'Onest', sans-serif;
+	font-weight: 700;
+	font-size: 18px;
+	letter-spacing: -0.01em;
+	padding: 11px 16px 11px 22px;
+	background: transparent;
+	color: var(--ink);
+	cursor: pointer;
+	text-transform: lowercase;
+	border: none;
+}
+
+.tag.active .label {
+	color: var(--paper);
+}
+
+.remove {
+	font-size: 18px;
+	line-height: 1;
+	padding: 11px 14px 11px 4px;
+	background: transparent;
+	border: none;
+	color: var(--ink);
+	cursor: pointer;
+	opacity: 0.4;
+	transition: opacity 0.15s ease;
+}
+
+.tag.active .remove {
+	color: var(--paper);
+}
+
+.remove:hover {
+	opacity: 1;
+}
+
+/* ── add button ── */
+.addBtn {
+	font-family: 'Bricolage Grotesque', 'Onest', sans-serif;
+	font-weight: 700;
+	font-size: 18px;
+	letter-spacing: -0.01em;
+	padding: 11px 22px;
+	border-radius: 999px;
+	border: 2px dashed var(--line);
+	background: transparent;
+	color: var(--ink-soft);
+	cursor: pointer;
+	transition:
+		border-color 0.15s ease,
+		color 0.15s ease,
+		transform 0.12s ease;
+}
+
+.addBtn:hover {
+	border-color: var(--ink);
+	color: var(--ink);
+	transform: translateY(-2px);
+}
+
+/* ── inline input ── */
+.addForm {
+	display: inline-flex;
+}
+
+.addInput {
+	font-family: 'Bricolage Grotesque', 'Onest', sans-serif;
+	font-weight: 700;
+	font-size: 18px;
+	letter-spacing: -0.01em;
+	padding: 11px 22px;
+	border-radius: 999px;
+	border: 2px solid var(--ink);
+	background: transparent;
+	color: var(--ink);
+	outline: none;
+	width: 160px;
+}
+
+.addInput::placeholder {
+	color: var(--ink-soft);
+	font-weight: 500;
+}

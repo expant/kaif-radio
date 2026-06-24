@@ -1,6 +1,6 @@
 import { useRef, useState, useEffect } from 'react';
-import type { Station } from '../../entities/station/types';
-import type { PlayerState } from './types';
+import type { Station } from '../../../../entities/station/types';
+import type { PlayerState } from '../types';
 
 export const usePlayer = (): PlayerState => {
 	const audioRef = useRef<HTMLAudioElement | null>(null);
@@ -58,13 +58,5 @@ export const usePlayer = (): PlayerState => {
 		setIsPlaying(false);
 	};
 
-	return {
-		currentStation,
-		isPlaying,
-		volume,
-		playError,
-		setVolume,
-		play,
-		stop,
-	};
+	return { currentStation, isPlaying, volume, playError, setVolume, play, stop };
 };
