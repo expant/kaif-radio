@@ -1,21 +1,21 @@
 import { useState } from 'react';
-import { usePlayer } from '../../widgets/player/usePlayer';
-import { useStations } from '../../shared/hooks/useStations';
-import { usePagination } from '../../features/station-pagination/usePagination';
-import { getStationColorHex } from '../../shared/utils/stationColor';
+import { usePlayer } from '../../../../widgets/player/model/hooks/usePlayer';
+import { useStations } from '../../../../shared/hooks/useStations';
+import { usePagination } from '../../../../features/station-pagination/model/hooks/usePagination';
+import { useGenres } from '../../../../features/genre-filter/model/hooks/useGenres';
+import { getStationColorHex } from '../../../../shared/utils/stationColor';
 
 export const useRadioPage = () => {
 	const [genre, setGenre] = useState('lofi');
 	const [likedIds, setLikedIds] = useState<Set<string>>(new Set());
 
+	const { genres, validating, validationError, addGenre, removeGenre, clearError } = useGenres();
 	const { page, totalPages, totalCount, setPage } = usePagination(genre);
 	const { stations, loading, error } = useStations(genre, page);
 	const player = usePlayer();
 
 	const currentIndex = player.currentStation
-		? stations.findIndex(
-				(s) => s.stationuuid === player.currentStation!.stationuuid,
-			)
+		? stations.findIndex((s) => s.stationuuid === player.currentStation!.stationuuid)
 		: -1;
 
 	const accentColor = getStationColorHex(currentIndex === -1 ? 0 : currentIndex);
@@ -43,5 +43,11 @@ export const useRadioPage = () => {
 		totalPages,
 		totalCount,
 		setPage,
+		genres,
+		validating,
+		validationError,
+		addGenre,
+		removeGenre,
+		clearError,
 	};
 };

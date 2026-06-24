@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
-import { fetchStationCount } from '../../entities/station/api';
-import { PAGE_SIZE } from '../../shared/constants/pagination';
+import { fetchStationCount } from '../../../../entities/station/api';
+import { PAGE_SIZE } from '../../../../shared/constants/pagination';
 
 export const usePagination = (tag: string) => {
 	const [page, setPage] = useState(1);

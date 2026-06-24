@@ -1,7 +1,4 @@
-export const getPageRange = (
-	page: number,
-	totalPages: number,
-): Array<number | '...'> => {
+export const getPageRange = (page: number, totalPages: number): Array<number | '...'> => {
 	if (totalPages <= 7) {
 		return Array.from({ length: totalPages }, (_, i) => i + 1);
 	}
@@ -10,11 +7,7 @@ export const getPageRange = (
 
 	if (page > 4) pages.push('...');
 
-	for (
-		let i = Math.max(3, page - 1);
-		i <= Math.min(totalPages - 2, page + 1);
-		i++
-	) {
+	for (let i = Math.max(3, page - 1); i <= Math.min(totalPages - 2, page + 1); i++) {
 		pages.push(i);
 	}
 

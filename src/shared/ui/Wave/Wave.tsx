@@ -24,10 +24,5 @@ export const Wave = ({ active }: Props) => {
 		}
 	}, []);
 
-	return (
-		<div
-			className={`${styles.wave} ${active ? styles.active : ''}`}
-			ref={barsRef}
-		/>
-	);
+	return <div className={`${styles.wave} ${active ? styles.active : ''}`} ref={barsRef} />;
 };

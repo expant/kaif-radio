@@ -1,10 +1,11 @@
-import { getStationColor } from '../../shared/utils/stationColor';
-import { IconHeart } from '../../shared/ui/icons/IconHeart';
-import { IconPlay } from '../../shared/ui/icons/IconPlay';
-import { IconPause } from '../../shared/ui/icons/IconPause';
-import { ErrorMessage } from '../../shared/ui/ErrorMessage/ErrorMessage';
-import { StationAvatar } from '../../shared/ui/StationAvatar/StationAvatar';
-import type { StationListProps } from './types';
+import type { CSSProperties } from 'react';
+import { getStationColor } from '../../../../shared/utils/stationColor';
+import { IconHeart } from '../../../../shared/ui/icons/IconHeart';
+import { IconPlay } from '../../../../shared/ui/icons/IconPlay';
+import { IconPause } from '../../../../shared/ui/icons/IconPause';
+import { ErrorMessage } from '../../../../shared/ui/ErrorMessage/ErrorMessage';
+import { StationAvatar } from '../../../../shared/ui/StationAvatar/StationAvatar';
+import type { StationListProps } from '../../model/types';
 import styles from './StationList.module.css';
 
 export const StationList = ({
@@ -54,27 +55,19 @@ export const StationList = ({
 					<li
 						key={station.stationuuid}
 						className={`${styles.row} ${isActive && isPlaying ? styles.playing : ''}`}
-						style={{ '--rc': color } as React.CSSProperties}
+						style={{ '--rc': color } as CSSProperties}
 						onClick={() => onSelect(station)}
 					>
 						<div className={styles.tile}>
-							<StationAvatar
-								name={station.name}
-								favicon={station.favicon}
-								color={color}
-							/>
+							<StationAvatar name={station.name} favicon={station.favicon} color={color} />
 						</div>
 
 						<div className={styles.metaMain}>
 							<div className={styles.rname}>{station.name}</div>
 							<div className={styles.rmeta}>
 								{station.country && <span>{station.country}</span>}
-								{station.country && station.bitrate > 0 && (
-									<span className={styles.dot} />
-								)}
-								{station.bitrate > 0 && (
-									<span className={styles.kbps}>{station.bitrate} kbps</span>
-								)}
+								{station.country && station.bitrate > 0 && <span className={styles.dot} />}
+								{station.bitrate > 0 && <span className={styles.kbps}>{station.bitrate} kbps</span>}
 							</div>
 						</div>
 
@@ -84,7 +77,7 @@ export const StationList = ({
 								e.stopPropagation();
 								onLike(station.stationuuid);
 							}}
-							aria-label='Лайк'
+							aria-label="Лайк"
 						>
 							<IconHeart filled={isLiked} />
 							<span>{station.votes}</span>

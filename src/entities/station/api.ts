@@ -2,10 +2,7 @@ import type { Station } from './types';
 import { resolveBaseUrl } from './resolveServer';
 import { PAGE_SIZE } from '../../shared/constants/pagination';
 
-export const fetchStationsByTag = async (
-	tag: string,
-	page: number,
-): Promise<Station[]> => {
+export const fetchStationsByTag = async (tag: string, page: number): Promise<Station[]> => {
 	const baseUrl = await resolveBaseUrl();
 	const offset = (page - 1) * PAGE_SIZE;
 
@@ -22,10 +19,9 @@ export const fetchStationsByTag = async (
 export const fetchStationCount = async (tag: string): Promise<number> => {
 	const baseUrl = await resolveBaseUrl();
 
-	const response = await fetch(
-		`${baseUrl}/tags/${encodeURIComponent(tag)}`,
-		{ signal: AbortSignal.timeout(8000) },
-	);
+	const response = await fetch(`${baseUrl}/tags/${encodeURIComponent(tag)}`, {
+		signal: AbortSignal.timeout(8000),
+	});
 
 	if (!response.ok) throw new Error('Failed to fetch station count');
 
