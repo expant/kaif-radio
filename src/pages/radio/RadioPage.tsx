@@ -44,13 +44,7 @@ export const RadioPage = () => {
 						chill vibes, always on
 					</div>
 				</div>
-				<div className={styles.headerRight}>
-					<div className={styles.stat}>
-						<div className={styles.statNum}>{totalCount}</div>
-						<div className={styles.statLbl}>станций в эфире</div>
-					</div>
-					<UserControls />
-				</div>
+				<UserControls />
 			</header>
 
 			<div className={styles.grid}>
@@ -65,9 +59,13 @@ export const RadioPage = () => {
 						/>
 					</div>
 
-					<h2 className={styles.sectionHead}>
-						эфир <span className={styles.count}>· {stations.length}</span>
-					</h2>
+					<div className={styles.sectionHead}>
+						<h2 className={styles.sectionTitle}>эфир</h2>
+						<div className={styles.ether}>
+							<span className={styles.etherNum}>{totalCount}</span>
+							<span className={styles.etherLbl}>станций в эфире</span>
+						</div>
+					</div>
 
 					<StationList
 						stations={stations}
