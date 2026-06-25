@@ -1,0 +1,246 @@
+.shell {
+	position: relative;
+	z-index: 1;
+	max-width: 660px;
+	margin: 0 auto;
+	padding: 30px clamp(18px, 4vw, 40px) 80px;
+}
+
+/* ── topbar ── */
+.topbar {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	margin-bottom: 30px;
+}
+
+.back {
+	display: inline-flex;
+	align-items: center;
+	gap: 8px;
+	font-family: 'Bricolage Grotesque', 'Onest', sans-serif;
+	font-weight: 700;
+	font-size: 17px;
+	color: var(--ink);
+	text-decoration: none;
+	padding: 9px 16px 9px 12px;
+	border: 2px solid var(--ink);
+	border-radius: 999px;
+	transition:
+		transform 0.12s ease,
+		background 0.15s ease,
+		color 0.15s ease;
+}
+
+.back:hover {
+	transform: translateY(-2px) rotate(-1deg);
+	background: var(--ink);
+	color: var(--paper);
+}
+
+.wordmark {
+	font-family: 'Bricolage Grotesque', 'Onest', sans-serif;
+	font-weight: 800;
+	letter-spacing: -0.04em;
+	font-size: 30px;
+	line-height: 1;
+}
+
+.wordmarkKaif {
+	color: var(--ink);
+}
+
+.wordmarkRadio {
+	color: transparent;
+	-webkit-background-clip: text;
+	background-clip: text;
+	background-image: linear-gradient(96deg, var(--coral), var(--pink) 55%, var(--violet));
+}
+
+/* ── page title ── */
+.pageTitle {
+	font-family: 'Bricolage Grotesque', 'Onest', sans-serif;
+	font-weight: 800;
+	letter-spacing: -0.03em;
+	font-size: clamp(40px, 7vw, 64px);
+	line-height: 0.9;
+	margin-bottom: 26px;
+}
+
+/* ── hero ── */
+.hero {
+	background: var(--card);
+	border: 3px solid var(--ink);
+	border-radius: 28px;
+	box-shadow: 10px 10px 0 var(--ink);
+	padding: 28px;
+	display: flex;
+	align-items: center;
+	gap: 24px;
+	flex-wrap: wrap;
+	margin-bottom: 32px;
+}
+
+.avatar {
+	width: 104px;
+	height: 104px;
+	border-radius: 28px;
+	flex-shrink: 0;
+	display: grid;
+	place-items: center;
+	font-family: 'Bricolage Grotesque', 'Onest', sans-serif;
+	font-weight: 800;
+	font-size: 52px;
+	color: #fff;
+	letter-spacing: -0.03em;
+	background: var(--coral);
+	border: 3px solid var(--ink);
+	box-shadow: inset 0 -14px 28px rgba(0, 0, 0, 0.18);
+}
+
+.heroMeta {
+	flex: 1;
+	min-width: 200px;
+}
+
+.metaLabel {
+	font-size: 12px;
+	font-weight: 700;
+	letter-spacing: 0.14em;
+	text-transform: uppercase;
+	color: var(--ink-soft);
+	margin-bottom: 6px;
+}
+
+.username {
+	font-family: 'Bricolage Grotesque', 'Onest', sans-serif;
+	font-weight: 800;
+	font-size: clamp(30px, 5vw, 40px);
+	letter-spacing: -0.03em;
+	line-height: 1;
+}
+
+.email {
+	margin-top: 8px;
+	display: inline-flex;
+	align-items: center;
+	gap: 8px;
+	font-size: 15px;
+	font-weight: 500;
+	color: var(--ink-soft);
+}
+
+.editBtn {
+	margin-left: auto;
+	display: inline-flex;
+	align-items: center;
+	gap: 8px;
+	flex-shrink: 0;
+	font-family: 'Bricolage Grotesque', 'Onest', sans-serif;
+	font-weight: 700;
+	font-size: 15px;
+	color: var(--ink);
+	background: var(--paper);
+	border: 2px solid var(--ink);
+	border-radius: 13px;
+	padding: 11px 16px;
+	cursor: pointer;
+	box-shadow: 0 4px 0 var(--ink);
+	transition:
+		transform 0.1s ease,
+		box-shadow 0.1s ease,
+		background 0.15s ease,
+		color 0.15s ease;
+}
+
+.editBtn:hover {
+	background: var(--coral);
+	color: #fff;
+}
+
+.editBtn:active {
+	transform: translateY(4px);
+	box-shadow: 0 0 0 var(--ink);
+}
+
+/* ── sections ── */
+.section {
+	margin-bottom: 30px;
+}
+
+.secTitle {
+	font-family: 'Bricolage Grotesque', 'Onest', sans-serif;
+	font-weight: 800;
+	font-size: 15px;
+	letter-spacing: 0.06em;
+	text-transform: uppercase;
+	color: var(--ink-soft);
+	margin: 0 0 12px 6px;
+}
+
+.panel {
+	background: var(--card);
+	border: 2px solid var(--line);
+	border-radius: 22px;
+	overflow: hidden;
+}
+
+.row {
+	display: flex;
+	align-items: center;
+	gap: 16px;
+	padding: 18px 20px;
+	transition: background 0.14s ease;
+}
+
+.row:hover {
+	background: var(--paper);
+}
+
+.rowIco {
+	width: 42px;
+	height: 42px;
+	border-radius: 13px;
+	flex-shrink: 0;
+	display: grid;
+	place-items: center;
+	background: var(--paper);
+	border: 2px solid var(--line);
+}
+
+.danger .rowIco {
+	background: #fff;
+	border-color: var(--coral);
+	color: var(--coral);
+}
+
+.rowBody {
+	flex: 1;
+	min-width: 0;
+}
+
+.rowTitle {
+	font-family: 'Bricolage Grotesque', 'Onest', sans-serif;
+	font-weight: 700;
+	font-size: 18px;
+	letter-spacing: -0.01em;
+}
+
+.danger .rowTitle {
+	color: var(--coral);
+}
+
+.rowSub {
+	font-size: 13.5px;
+	font-weight: 500;
+	color: var(--ink-soft);
+	margin-top: 2px;
+}
+
+.logoutInRow {
+	border: none;
+	background: transparent;
+	width: auto;
+	height: auto;
+	display: none;
+}
