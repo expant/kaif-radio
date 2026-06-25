@@ -1,7 +1,7 @@
 import { Link } from 'react-router';
 import { useAuth } from '@/features/auth/model/hooks/useAuth';
-import { IconLogout } from '@/shared/ui/icons/IconLogout';
 import { IconArrow } from '@/shared/ui/icons/IconArrow';
+import { LogoutButton } from '@/features/auth/logout/ui/LogoutButton';
 import styles from './UserControls.module.css';
 
 export const UserControls = () => {
@@ -31,9 +31,7 @@ export const UserControls = () => {
 				</span>
 			</Link>
 
-			<button className={styles.logoutBtn} aria-label="Выйти">
-				<IconLogout size={20} />
-			</button>
+			<LogoutButton />
 		</div>
 	);
 };
