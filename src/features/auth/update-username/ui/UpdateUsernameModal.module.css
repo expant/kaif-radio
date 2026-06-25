@@ -1,0 +1,135 @@
+.overlay {
+	position: fixed;
+	inset: 0;
+	z-index: 50;
+	background: rgba(22, 19, 14, 0.42);
+	backdrop-filter: blur(3px);
+	display: grid;
+	place-items: center;
+	padding: 24px;
+	animation: fade 0.2s ease;
+}
+
+.modal {
+	width: 100%;
+	max-width: 400px;
+	background: var(--card);
+	border: 3px solid var(--ink);
+	border-radius: 26px;
+	box-shadow: 12px 12px 0 var(--ink);
+	padding: 28px;
+	animation: pop 0.25s ease;
+}
+
+.title {
+	font-family: 'Bricolage Grotesque', 'Onest', sans-serif;
+	font-weight: 800;
+	font-size: 26px;
+	letter-spacing: -0.02em;
+	margin-bottom: 6px;
+}
+
+.sub {
+	font-size: 14px;
+	font-weight: 500;
+	color: var(--ink-soft);
+	margin-bottom: 18px;
+}
+
+.label {
+	display: block;
+	font-size: 12px;
+	font-weight: 700;
+	letter-spacing: 0.1em;
+	text-transform: uppercase;
+	color: var(--ink-soft);
+	margin: 0 0 7px 4px;
+}
+
+.input {
+	width: 100%;
+	font-family: 'Space Grotesk', 'Onest', sans-serif;
+	font-size: 16px;
+	font-weight: 500;
+	color: var(--ink);
+	background: var(--paper);
+	border: 2px solid var(--line);
+	border-radius: 14px;
+	padding: 14px 16px;
+	outline: none;
+	transition:
+		border-color 0.15s ease,
+		box-shadow 0.15s ease;
+}
+
+.input:focus {
+	border-color: var(--ink);
+	box-shadow: 4px 4px 0 var(--coral);
+}
+
+.actions {
+	display: flex;
+	gap: 10px;
+	margin-top: 20px;
+}
+
+.btnGhost,
+.btnSolid {
+	flex: 1;
+	font-family: 'Bricolage Grotesque', 'Onest', sans-serif;
+	font-weight: 800;
+	font-size: 16px;
+	border-radius: 14px;
+	padding: 13px;
+	cursor: pointer;
+	transition:
+		transform 0.1s ease,
+		box-shadow 0.1s ease;
+}
+
+.btnGhost {
+	background: var(--paper);
+	border: 2px solid var(--ink);
+	color: var(--ink);
+}
+
+.btnGhost:hover {
+	background: var(--line);
+}
+
+.btnSolid {
+	background: var(--coral);
+	border: 3px solid var(--ink);
+	color: #fff;
+	box-shadow: 0 5px 0 var(--ink);
+}
+
+.btnSolid:active:not(:disabled) {
+	transform: translateY(5px);
+	box-shadow: 0 0 0 var(--ink);
+}
+
+.btnSolid:disabled {
+	opacity: 0.6;
+	cursor: default;
+}
+
+@keyframes fade {
+	from {
+		opacity: 0;
+	}
+	to {
+		opacity: 1;
+	}
+}
+
+@keyframes pop {
+	from {
+		opacity: 0;
+		transform: translateY(16px);
+	}
+	to {
+		opacity: 1;
+		transform: translateY(0);
+	}
+}
