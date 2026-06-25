@@ -4,6 +4,7 @@ import { StationList } from '../../widgets/station-list/ui/StationList/StationLi
 import { Player } from '../../widgets/player/ui/Player/Player';
 import { Pagination } from '../../features/station-pagination/ui/Pagination/Pagination';
 import { Toast } from '../../shared/ui/Toast/Toast';
+import { UserControls } from '../../widgets/user-controls/ui/UserControls';
 import { useRadioPage } from './model/hooks/useRadioPage';
 import styles from './RadioPage.module.css';
 
@@ -43,9 +44,12 @@ export const RadioPage = () => {
 						chill vibes, always on
 					</div>
 				</div>
-				<div className={styles.stat}>
-					<div className={styles.statNum}>{totalCount}</div>
-					<div className={styles.statLbl}>станций в эфире</div>
+				<div className={styles.headerRight}>
+					<div className={styles.stat}>
+						<div className={styles.statNum}>{totalCount}</div>
+						<div className={styles.statLbl}>станций в эфире</div>
+					</div>
+					<UserControls />
 				</div>
 			</header>
 

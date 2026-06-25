@@ -16,13 +16,13 @@ export const AddGenreForm = ({ validating, onAdd }: AddGenreFormProps) => {
 		return (
 			<form className={styles.form} onSubmit={onSubmit}>
 				<input
-					className={styles.input}
 					autoFocus
-					placeholder="жанр..."
 					value={value}
-					onChange={(e) => handleChange(e.target.value)}
-					onBlur={handleBlur}
+					placeholder="жанр..."
 					disabled={validating}
+					className={styles.input}
+					onBlur={handleBlur}
+					onChange={(e) => handleChange(e.target.value)}
 				/>
 			</form>
 		);

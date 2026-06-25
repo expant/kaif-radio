@@ -1,0 +1,257 @@
+.form {
+	display: flex;
+	flex-direction: column;
+	gap: 14px;
+}
+
+.field {
+	display: flex;
+	flex-direction: column;
+	gap: 7px;
+}
+
+.field label {
+	font-size: 12px;
+	font-weight: 700;
+	letter-spacing: 0.1em;
+	text-transform: uppercase;
+	color: var(--ink-soft);
+	padding-left: 4px;
+}
+
+.field input {
+	width: 100%;
+	font-family: 'Space Grotesk', 'Onest', sans-serif;
+	font-size: 16px;
+	font-weight: 500;
+	color: var(--ink);
+	background: var(--paper);
+	border: 2px solid var(--line);
+	border-radius: 15px;
+	padding: 14px 16px;
+	outline: none;
+	transition:
+		border-color 0.15s ease,
+		box-shadow 0.15s ease;
+}
+
+.field input::placeholder {
+	color: #b6ad9c;
+}
+
+.field input:focus {
+	border-color: var(--ink);
+	box-shadow: 4px 4px 0 var(--coral);
+}
+
+.pwWrap {
+	position: relative;
+}
+
+.pwWrap input {
+	width: 100%;
+	padding-right: 48px;
+}
+
+.pwToggle {
+	position: absolute;
+	right: 8px;
+	top: 50%;
+	transform: translateY(-50%);
+	border: none;
+	background: transparent;
+	cursor: pointer;
+	padding: 8px;
+	color: var(--ink-soft);
+	display: grid;
+	place-items: center;
+}
+
+.pwToggle:hover {
+	color: var(--ink);
+}
+
+.rowExtra {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	margin-top: -2px;
+}
+
+.remember {
+	display: flex;
+	align-items: center;
+	gap: 8px;
+	font-size: 13.5px;
+	font-weight: 500;
+	color: var(--ink-soft);
+	cursor: pointer;
+	user-select: none;
+}
+
+.remember input[type='checkbox'] {
+	appearance: none;
+	width: 18px;
+	height: 18px;
+	border: 2px solid var(--line);
+	border-radius: 6px;
+	background: var(--paper);
+	cursor: pointer;
+	position: relative;
+	flex-shrink: 0;
+}
+
+.remember input[type='checkbox']:checked {
+	background: var(--coral);
+	border-color: var(--coral);
+}
+
+.remember input[type='checkbox']:checked::after {
+	content: '';
+	position: absolute;
+	inset: 0;
+	margin: auto;
+	width: 5px;
+	height: 9px;
+	border: solid #fff;
+	border-width: 0 2px 2px 0;
+	transform: rotate(45deg) translateY(-1px);
+}
+
+.forgot {
+	font-size: 13.5px;
+	font-weight: 700;
+	color: var(--coral);
+	text-decoration: none;
+}
+
+.forgot:hover {
+	text-decoration: underline;
+}
+
+.submit {
+	margin-top: 6px;
+	font-family: 'Bricolage Grotesque', 'Onest', sans-serif;
+	font-weight: 800;
+	font-size: 19px;
+	letter-spacing: -0.01em;
+	color: #fff;
+	background: var(--coral);
+	border: 3px solid var(--ink);
+	border-radius: 15px;
+	padding: 15px;
+	cursor: pointer;
+	box-shadow: 0 6px 0 var(--ink);
+	transition:
+		transform 0.1s ease,
+		box-shadow 0.1s ease;
+}
+
+.submit:active {
+	transform: translateY(6px);
+	box-shadow: 0 0 0 var(--ink);
+}
+
+.divider {
+	display: flex;
+	align-items: center;
+	gap: 12px;
+	margin: 6px 0 2px;
+	color: var(--ink-soft);
+	font-size: 13px;
+	font-weight: 600;
+}
+
+.divider::before,
+.divider::after {
+	content: '';
+	flex: 1;
+	height: 2px;
+	background: var(--line);
+	border-radius: 2px;
+}
+
+.socials {
+	display: flex;
+	gap: 10px;
+}
+
+.social {
+	flex: 1;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	gap: 8px;
+	font-family: 'Space Grotesk', 'Onest', sans-serif;
+	font-weight: 700;
+	font-size: 14px;
+	color: var(--ink);
+	background: var(--paper);
+	border: 2px solid var(--line);
+	border-radius: 13px;
+	padding: 12px;
+	cursor: pointer;
+	transition:
+		border-color 0.15s ease,
+		transform 0.12s ease;
+}
+
+.social:hover {
+	border-color: var(--ink);
+	transform: translateY(-2px);
+}
+
+.foot {
+	text-align: center;
+	font-size: 13.5px;
+	font-weight: 500;
+	color: var(--ink-soft);
+	margin-top: 6px;
+}
+
+.error {
+	font-size: 13px;
+	font-weight: 600;
+	color: var(--coral);
+	padding-left: 4px;
+	margin-top: -4px;
+}
+
+.submit:disabled {
+	opacity: 0.6;
+	cursor: default;
+}
+
+.success {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	gap: 12px;
+	padding: 24px 0 8px;
+	text-align: center;
+}
+
+.successEmoji {
+	font-size: 48px;
+	line-height: 1;
+}
+
+.successText {
+	font-size: 15px;
+	font-weight: 500;
+	color: var(--ink-soft);
+	line-height: 1.5;
+	max-width: 280px;
+}
+
+.footLink {
+	font-weight: 700;
+	color: var(--ink);
+	background: none;
+	border: none;
+	border-bottom: 2px solid var(--coral);
+	cursor: pointer;
+	padding: 0;
+	font-family: inherit;
+	font-size: inherit;
+}

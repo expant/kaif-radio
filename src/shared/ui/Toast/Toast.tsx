@@ -10,12 +10,15 @@ export const Toast = ({ message, onClose }: ToastProps) => {
 
 	useEffect(() => {
 		const hideTimer = setTimeout(() => setExiting(true), VISIBLE_DURATION);
+
 		return () => clearTimeout(hideTimer);
 	}, []);
 
 	useEffect(() => {
 		if (!exiting) return;
+
 		const closeTimer = setTimeout(onClose, EXIT_DURATION);
+
 		return () => clearTimeout(closeTimer);
 	}, [exiting, onClose]);
 
