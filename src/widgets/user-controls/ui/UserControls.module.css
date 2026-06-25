@@ -1,0 +1,81 @@
+.signInBtn {
+	font-family: 'Bricolage Grotesque', 'Onest', sans-serif;
+	font-weight: 700;
+	font-size: 16px;
+	padding: 10px 22px;
+	border-radius: 999px;
+	border: 2px solid var(--ink);
+	background: transparent;
+	color: var(--ink);
+	text-decoration: none;
+	transition:
+		background 0.15s ease,
+		color 0.15s ease,
+		transform 0.12s ease;
+}
+
+.signInBtn:hover {
+	background: var(--ink);
+	color: var(--paper);
+	transform: translateY(-2px);
+}
+
+.controls {
+	display: flex;
+	align-items: center;
+	gap: 8px;
+}
+
+.profileBtn {
+	display: flex;
+	align-items: center;
+	gap: 8px;
+	padding: 6px 16px 6px 6px;
+	border-radius: 999px;
+	border: 2px solid var(--line);
+	background: var(--card);
+	cursor: pointer;
+	transition:
+		border-color 0.15s ease,
+		transform 0.12s ease;
+}
+
+.profileBtn:hover {
+	border-color: var(--ink);
+	transform: translateY(-2px);
+}
+
+.avatar {
+	width: 32px;
+	height: 32px;
+	border-radius: 50%;
+	background: var(--coral);
+	color: #fff;
+	font-family: 'Bricolage Grotesque', 'Onest', sans-serif;
+	font-weight: 800;
+	font-size: 14px;
+	display: grid;
+	place-items: center;
+}
+
+.logoutBtn {
+	width: 40px;
+	height: 40px;
+	border-radius: 50%;
+	border: 2px solid var(--line);
+	background: var(--card);
+	color: var(--ink-soft);
+	cursor: pointer;
+	display: grid;
+	place-items: center;
+	transition:
+		border-color 0.15s ease,
+		color 0.15s ease,
+		transform 0.12s ease;
+}
+
+.logoutBtn:hover {
+	border-color: var(--ink);
+	color: var(--ink);
+	transform: translateY(-2px);
+}
