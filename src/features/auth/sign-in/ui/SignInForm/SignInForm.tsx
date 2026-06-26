@@ -61,10 +61,6 @@ export const SignInForm = ({ onSwitchToSignUp }: SignInFormProps) => {
 				</div>
 
 				<div className={styles.rowExtra}>
-					<label className={styles.remember}>
-						<input type="checkbox" defaultChecked />
-						запомнить меня
-					</label>
 					<a href="/auth/reset-password" className={styles.forgot}>
 						забыл пароль?
 					</a>
