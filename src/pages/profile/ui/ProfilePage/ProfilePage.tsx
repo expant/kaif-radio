@@ -32,7 +32,7 @@ export const ProfilePage = () => {
 				<div className={styles.avatar}>{initial}</div>
 				<div className={styles.heroMeta}>
 					<div className={styles.metaLabel}>пользователь</div>
-					<div className={styles.username}>{username || 'без имени'}</div>
+					<div className={styles.username} title={username}>{username || 'без имени'}</div>
 					<div className={styles.email}>
 						<IconMail size={16} />
 						<span>{email}</span>
