@@ -5,10 +5,20 @@ export const GenreTags = ({
 	genres,
 	activeGenre,
 	actionSlot,
+	favoritesTag,
 	onSelect,
 	onRemove,
 }: GenreTagsProps) => (
 	<div className={styles.container}>
+		{favoritesTag && (
+			<button
+				className={`${styles.favoritesTag} ${activeGenre === favoritesTag ? styles.active : ''}`}
+				onClick={() => onSelect(favoritesTag)}
+			>
+				❤️
+			</button>
+		)}
+
 		{genres.map((genre) => (
 			<div key={genre} className={`${styles.tag} ${activeGenre === genre ? styles.active : ''}`}>
 				<button className={styles.label} onClick={() => onSelect(genre)}>

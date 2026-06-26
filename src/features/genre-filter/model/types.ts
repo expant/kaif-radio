@@ -4,6 +4,7 @@ export type GenreTagsProps = {
 	genres: string[];
 	activeGenre: string;
 	actionSlot?: ReactNode;
+	favoritesTag?: string;
 	onSelect: (genre: string) => void;
 	onRemove: (genre: string) => void;
 };

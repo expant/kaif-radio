@@ -5,13 +5,17 @@ import { Player } from '../../widgets/player/ui/Player/Player';
 import { Pagination } from '../../features/station-pagination/ui/Pagination/Pagination';
 import { Toast } from '../../shared/ui/Toast/Toast';
 import { UserControls } from '../../widgets/user-controls/ui/UserControls';
+import { FavoriteButton } from '../../features/favorites/ui/FavoriteButton';
+import { FAVORITES_TAG } from '../../features/genre-filter/model/constants';
 import { useRadioPage } from './model/hooks/useRadioPage';
+import type { Station } from '../../entities/station/types';
 import styles from './RadioPage.module.css';
 
 export const RadioPage = () => {
 	const {
 		genre,
 		setGenre,
+		isFavoritesMode,
 		stations,
 		loading,
 		error,
@@ -28,6 +32,8 @@ export const RadioPage = () => {
 		removeGenre,
 		clearError,
 	} = useRadioPage();
+
+	const renderFavoriteButton = (station: Station) => <FavoriteButton station={station} />;
 
 	return (
 		<div className={styles.shell}>
@@ -56,15 +62,18 @@ export const RadioPage = () => {
 							onSelect={setGenre}
 							onRemove={removeGenre}
 							actionSlot={<AddGenreForm validating={validating} onAdd={addGenre} />}
+							favoritesTag={FAVORITES_TAG}
 						/>
 					</div>
 
 					<div className={styles.sectionHead}>
-						<h2 className={styles.sectionTitle}>эфир</h2>
-						<div className={styles.ether}>
-							<span className={styles.etherNum}>{totalCount}</span>
-							<span className={styles.etherLbl}>станций в эфире</span>
-						</div>
+						<h2 className={styles.sectionTitle}>{isFavoritesMode ? 'избранные' : 'эфир'}</h2>
+						{!isFavoritesMode && (
+							<div className={styles.ether}>
+								<span className={styles.etherNum}>{totalCount}</span>
+								<span className={styles.etherLbl}>станций в эфире</span>
+							</div>
+						)}
 					</div>
 
 					<StationList
@@ -74,9 +83,12 @@ export const RadioPage = () => {
 						currentStationId={player.currentStation?.stationuuid ?? null}
 						isPlaying={player.isPlaying}
 						onSelect={player.play}
+						renderFavoriteButton={renderFavoriteButton}
 					/>
 
-					<Pagination page={page} totalPages={totalPages} onPageChange={setPage} />
+					{!isFavoritesMode && (
+						<Pagination page={page} totalPages={totalPages} onPageChange={setPage} />
+					)}
 				</main>
 
 				<Player player={player} accentColor={accentColor} />

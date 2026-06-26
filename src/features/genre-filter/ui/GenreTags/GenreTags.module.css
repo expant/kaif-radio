@@ -5,6 +5,27 @@
 	align-items: center;
 }
 
+.favoritesTag {
+	font-size: 18px;
+	padding: 11px 16px;
+	border-radius: 999px;
+	border: 2px solid var(--ink);
+	background: transparent;
+	cursor: pointer;
+	transition:
+		background 0.15s ease,
+		transform 0.12s ease;
+	line-height: 1;
+}
+
+.favoritesTag:hover {
+	transform: translateY(-2px);
+}
+
+.favoritesTag.active {
+	background: var(--ink);
+}
+
 .tag {
 	display: inline-flex;
 	align-items: center;

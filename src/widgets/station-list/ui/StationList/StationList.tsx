@@ -15,6 +15,7 @@ export const StationList = ({
 	currentStationId,
 	isPlaying,
 	onSelect,
+	renderFavoriteButton,
 }: StationListProps) => {
 	if (loading) {
 		return (
@@ -74,6 +75,8 @@ export const StationList = ({
 								{station.votes}
 							</span>
 						)}
+
+						{renderFavoriteButton?.(station)}
 
 						<button
 							className={styles.playBtn}
