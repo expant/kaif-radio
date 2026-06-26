@@ -113,6 +113,58 @@
 	color: var(--ink-soft);
 }
 
+/* ── auth prompt ── */
+.authPrompt {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	gap: 10px;
+	padding: 48px 24px;
+	text-align: center;
+}
+
+.authEmoji {
+	font-size: 52px;
+	line-height: 1;
+}
+
+.authTitle {
+	font-family: 'Bricolage Grotesque', 'Onest', sans-serif;
+	font-weight: 800;
+	font-size: clamp(20px, 2.5vw, 26px);
+	letter-spacing: -0.02em;
+	color: var(--ink);
+}
+
+.authSub {
+	font-size: 15px;
+	font-weight: 500;
+	color: var(--ink-soft);
+}
+
+.authBtn {
+	margin-top: 8px;
+	font-family: 'Bricolage Grotesque', 'Onest', sans-serif;
+	font-weight: 700;
+	font-size: 17px;
+	padding: 12px 28px;
+	border-radius: 999px;
+	border: 2px solid var(--ink);
+	background: transparent;
+	color: var(--ink);
+	text-decoration: none;
+	transition:
+		background 0.15s ease,
+		color 0.15s ease,
+		transform 0.12s ease;
+}
+
+.authBtn:hover {
+	background: var(--ink);
+	color: var(--paper);
+	transform: translateY(-2px);
+}
+
 /* ── mobile ── */
 @media (max-width: 900px) {
 	.grid {
