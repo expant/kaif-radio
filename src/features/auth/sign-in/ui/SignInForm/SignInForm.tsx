@@ -55,7 +55,7 @@ export const SignInForm = ({ onSwitchToSignUp }: SignInFormProps) => {
 							onClick={togglePassword}
 							aria-label="показать пароль"
 						>
-							<IconEye />
+							<IconEye size={20} />
 						</button>
 					</div>
 				</div>
