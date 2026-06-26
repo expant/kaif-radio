@@ -1,9 +1,11 @@
 import { useState } from 'react';
 import { useAuth } from '@/features/auth/model/hooks/useAuth';
+import { useLogout } from '@/features/auth/logout/model/hooks/useLogout';
 
 export const useProfilePage = () => {
 	const { session } = useAuth();
 	const [editOpen, setEditOpen] = useState(false);
+	const { handleLogout } = useLogout();
 
 	const username = session?.user.user_metadata?.username as string | undefined;
 	const email = session?.user.email ?? '';
@@ -16,5 +18,6 @@ export const useProfilePage = () => {
 		editOpen,
 		openEdit: () => setEditOpen(true),
 		closeEdit: () => setEditOpen(false),
+		handleLogout,
 	};
 };

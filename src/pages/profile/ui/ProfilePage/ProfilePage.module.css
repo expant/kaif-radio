@@ -193,6 +193,7 @@
 	align-items: center;
 	gap: 16px;
 	padding: 18px 20px;
+	cursor: pointer;
 	transition: background 0.14s ease;
 }
 
@@ -240,10 +241,3 @@
 	margin-top: 2px;
 }
 
-.logoutInRow {
-	border: none;
-	background: transparent;
-	width: auto;
-	height: auto;
-	display: none;
-}
