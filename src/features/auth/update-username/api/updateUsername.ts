@@ -15,8 +15,5 @@ export const updateUsername = async (username: string) => {
 
 	const { error: dbError } = await supabase.from('profiles').update({ username }).eq('id', user.id);
 
-	// FIXME: message "permission denied for table profiles" - нужно починить политики таблицы profiles
-	console.log(dbError);
-
 	if (dbError) throw dbError;
 };

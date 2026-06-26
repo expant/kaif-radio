@@ -1,0 +1,38 @@
+.overlay {
+	position: fixed;
+	inset: 0;
+	z-index: 50;
+	background: rgba(22, 19, 14, 0.42);
+	backdrop-filter: blur(3px);
+	display: grid;
+	place-items: center;
+	padding: 24px;
+	animation: fade 0.2s ease;
+}
+
+.modal {
+	width: 100%;
+	max-width: 400px;
+	background: var(--card);
+	border: 3px solid var(--ink);
+	border-radius: 26px;
+	box-shadow: 12px 12px 0 var(--ink);
+	padding: 28px;
+	animation: pop 0.25s ease;
+}
+
+@keyframes fade {
+	from { opacity: 0; }
+	to { opacity: 1; }
+}
+
+@keyframes pop {
+	from {
+		opacity: 0;
+		transform: translateY(16px);
+	}
+	to {
+		opacity: 1;
+		transform: translateY(0);
+	}
+}
