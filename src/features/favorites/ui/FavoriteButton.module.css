@@ -1,0 +1,22 @@
+.btn {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	background: transparent;
+	border: none;
+	cursor: pointer;
+	color: var(--ink-soft);
+	padding: 6px;
+	transition:
+		color 0.15s ease,
+		transform 0.12s ease;
+}
+
+.btn:hover {
+	color: var(--coral);
+	transform: scale(1.15);
+}
+
+.btn.active {
+	color: var(--coral);
+}

@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import { createPortal } from 'react-dom';
 import type { ToastProps } from './types';
 import styles from './Toast.module.css';
 
@@ -10,22 +11,20 @@ export const Toast = ({ message, onClose }: ToastProps) => {
 
 	useEffect(() => {
 		const hideTimer = setTimeout(() => setExiting(true), VISIBLE_DURATION);
-
 		return () => clearTimeout(hideTimer);
 	}, []);
 
 	useEffect(() => {
 		if (!exiting) return;
-
 		const closeTimer = setTimeout(onClose, EXIT_DURATION);
-
 		return () => clearTimeout(closeTimer);
 	}, [exiting, onClose]);
 
-	return (
+	return createPortal(
 		<div className={`${styles.toast} ${exiting ? styles.exit : styles.enter}`}>
 			<span className={styles.dot} />
 			{message}
-		</div>
+		</div>,
+		document.body,
 	);
 };
