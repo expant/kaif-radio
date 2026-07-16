@@ -42,6 +42,30 @@ npm run format    # prettier --write "src/**/*.{ts,tsx,css}"
      supabase start/stop, применение миграций, сброс базы и т.п.
      И укажите, можно ли мне запускать их самому или только по запросу. -->
 
+## Архитектура данных: две дорожки
+
+Данные ходят не по одной линии `frontend → backend → supabase`, а по двум
+независимым дорожкам, разделённым по ответственности:
+
+- **Дорожка A — пользовательские данные** (auth, favorites, профиль):
+  `frontend ↔ Supabase` напрямую. Защита — RLS-политики, ключ `anon`.
+  Auth-флоу — на gotrue, свой backend его НЕ дублирует.
+- **Дорожка B — данные станций** (radio-browser, кеш, фильтрация):
+  `frontend → backend → radio-browser / Redis`, при нужде backend пишет
+  в Supabase под ключом `service_role`.
+
+Границы безопасности:
+
+- `service_role`-ключ живёт только в backend, во frontend не попадает никогда.
+- Backend не строит свою авторизацию — он проверяет подпись JWT, выданного
+  Supabase, и достаёт из него `user_id`.
+- `entities/station/resolveServer.ts` — временный протез: пока backend не готов,
+  frontend ходит в radio-browser сам. С появлением backend эта логика уезжает
+  на сервер, усложнять её на фронте не нужно.
+
+<!-- backend/ пока пустой. Пока его нет — работаем frontend-first (YAGNI),
+     задел под backend заранее не строим. -->
+
 ## Архитектура: FSD
 
 Слои: `app / pages / widgets / features / entities / shared`.
