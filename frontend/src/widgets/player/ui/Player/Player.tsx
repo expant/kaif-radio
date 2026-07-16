@@ -8,7 +8,7 @@ import { StationAvatar } from '../../../../shared/ui/StationAvatar/StationAvatar
 import styles from './Player.module.css';
 
 export const Player = ({ player, accentColor }: PlayerProps) => {
-	const { currentStation, isPlaying, volume, playError, setVolume, play, stop } = player;
+	const { currentStation, isPlaying, volume, playError, genre, setVolume, play, stop } = player;
 
 	const handlePlayPause = () => {
 		if (!currentStation) return;
@@ -48,6 +48,7 @@ export const Player = ({ player, accentColor }: PlayerProps) => {
 			</div>
 
 			<div className={styles.info}>
+				{currentStation && genre && <span className={styles.genre}># {genre}</span>}
 				<div className={styles.name} title={currentStation?.name}>
 					{currentStation ? currentStation.name : 'kaifradio'}
 				</div>

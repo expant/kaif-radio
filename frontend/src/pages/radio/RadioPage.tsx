@@ -93,7 +93,9 @@ export const RadioPage = () => {
 							error={error}
 							currentStationId={player.currentStation?.stationuuid ?? null}
 							isPlaying={player.isPlaying}
-							onSelect={player.play}
+							onSelect={(station, color) =>
+								player.play(station, color, isFavoritesMode ? 'избранное' : genre)
+							}
 							renderFavoriteButton={renderFavoriteButton}
 						/>
 					)}

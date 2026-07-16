@@ -13,6 +13,7 @@ export const PlayerProvider = ({ children }: PlayerProviderProps) => {
 	const [volume, setVolumeState] = useState(INITIAL_VOLUME);
 	const [playError, setPlayError] = useState<string | null>(null);
 	const [accentColor, setAccentColor] = useState(DEFAULT_ACCENT);
+	const [genre, setGenre] = useState<string | null>(null);
 
 	useEffect(() => {
 		const audio = new Audio();
@@ -42,7 +43,7 @@ export const PlayerProvider = ({ children }: PlayerProviderProps) => {
 		}
 	};
 
-	const play = async (station: Station, accent?: string) => {
+	const play = async (station: Station, accent?: string, originGenre?: string) => {
 		const audio = audioRef.current;
 		if (!audio) return;
 
@@ -59,6 +60,7 @@ export const PlayerProvider = ({ children }: PlayerProviderProps) => {
 		audio.src = station.url_resolved || station.url;
 		setCurrentStation(station);
 		setAccentColor(accent ?? DEFAULT_ACCENT);
+		setGenre(originGenre ?? null);
 
 		await startPlayback(audio, 'не удалось воспроизвести эту станцию');
 	};
@@ -70,7 +72,17 @@ export const PlayerProvider = ({ children }: PlayerProviderProps) => {
 
 	return (
 		<PlayerContext.Provider
-			value={{ currentStation, isPlaying, volume, playError, accentColor, setVolume, play, stop }}
+			value={{
+				currentStation,
+				isPlaying,
+				volume,
+				playError,
+				accentColor,
+				genre,
+				setVolume,
+				play,
+				stop,
+			}}
 		>
 			{children}
 		</PlayerContext.Provider>

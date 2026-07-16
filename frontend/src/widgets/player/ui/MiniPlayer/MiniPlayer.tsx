@@ -7,11 +7,14 @@ import { StationAvatar } from '@/shared/ui/StationAvatar/StationAvatar';
 import styles from './MiniPlayer.module.css';
 
 export const MiniPlayer = () => {
-	const { currentStation, isPlaying, volume, playError, accentColor, setVolume, play } = usePlayer();
+	const { currentStation, isPlaying, volume, playError, accentColor, genre, setVolume, play } =
+		usePlayer();
 
 	if (!currentStation) return null;
 
 	const accent = accentColor;
+	const status = isPlaying ? 'live' : 'на паузе';
+	const sub = playError ?? (genre ? `${genre} · ${status}` : status);
 
 	return (
 		<div className={styles.dock} style={{ '--accent': accent } as CSSProperties}>
@@ -23,7 +26,7 @@ export const MiniPlayer = () => {
 				<div className={styles.name} title={currentStation.name}>
 					{currentStation.name}
 				</div>
-				<div className={styles.sub}>{playError ? playError : isPlaying ? 'live' : 'на паузе'}</div>
+				<div className={styles.sub}>{sub}</div>
 			</div>
 
 			<button

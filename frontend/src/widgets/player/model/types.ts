@@ -6,8 +6,9 @@ export type PlayerState = {
 	volume: number;
 	playError: string | null;
 	accentColor: string;
+	genre: string | null;
 	setVolume: (v: number) => void;
-	play: (station: Station, accentColor?: string) => Promise<void>;
+	play: (station: Station, accentColor?: string, genre?: string) => Promise<void>;
 	stop: () => void;
 };
 

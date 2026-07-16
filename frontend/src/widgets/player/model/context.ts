@@ -7,6 +7,7 @@ export const PlayerContext = createContext<PlayerState>({
 	volume: 0.8,
 	playError: null,
 	accentColor: '#FF5A3C',
+	genre: null,
 	setVolume: () => {},
 	play: async () => {},
 	stop: () => {},
