@@ -5,6 +5,7 @@ import { IconPause } from '../../../../shared/ui/icons/IconPause';
 import { IconVolume } from '../../../../shared/ui/icons/IconVolume';
 import { Wave } from '../../../../shared/ui/Wave/Wave';
 import { StationAvatar } from '../../../../shared/ui/StationAvatar/StationAvatar';
+import { FavoriteButton } from '../../../../features/favorites/ui/FavoriteButton';
 import styles from './Player.module.css';
 
 export const Player = ({ player, accentColor }: PlayerProps) => {
@@ -83,6 +84,12 @@ export const Player = ({ player, accentColor }: PlayerProps) => {
 						onChange={(e) => setVolume(Number(e.target.value))}
 					/>
 				</div>
+
+				{currentStation && (
+					<span className={styles.fav}>
+						<FavoriteButton station={currentStation} />
+					</span>
+				)}
 			</div>
 
 			<Wave active={isPlaying} />

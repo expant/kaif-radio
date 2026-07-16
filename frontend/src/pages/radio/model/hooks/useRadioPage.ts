@@ -1,10 +1,9 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { usePlayer } from '../../../../widgets/player/model/hooks/usePlayer';
 import { useStations } from '../../../../shared/hooks/useStations';
 import { usePagination } from '../../../../features/station-pagination/model/hooks/usePagination';
 import { useGenres } from '../../../../features/genre-filter/model/hooks/useGenres';
-import { useFavoriteIds } from '../../../../features/favorites/model/hooks/useFavoriteIds';
-import { useFavoritesFilter } from '../../../../features/favorites/model/hooks/useFavoritesFilter';
+import { useFavorites } from '../../../../features/favorites/model/hooks/useFavorites';
 import { FAVORITES_TAG } from '../../../../features/genre-filter/model/constants';
 
 export const useRadioPage = () => {
@@ -23,9 +22,13 @@ export const useRadioPage = () => {
 		stations: favoriteStations,
 		loading: favLoading,
 		error: favError,
-	} = useFavoritesFilter(isFavoritesMode);
-	const { ids: favoriteIds, toggle: toggleFavorite } = useFavoriteIds();
+		ensureLoaded: ensureFavoritesLoaded,
+	} = useFavorites();
 	const player = usePlayer();
+
+	useEffect(() => {
+		if (isFavoritesMode) ensureFavoritesLoaded();
+	}, [isFavoritesMode, ensureFavoritesLoaded]);
 
 	const stations = isFavoritesMode ? favoriteStations : radioStations;
 	const loading = isFavoritesMode ? favLoading : radioLoading;
@@ -52,7 +55,5 @@ export const useRadioPage = () => {
 		addGenre,
 		removeGenre,
 		clearError,
-		favoriteIds,
-		toggleFavorite,
 	};
 };

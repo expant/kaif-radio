@@ -5,7 +5,7 @@
 	background: transparent;
 	border: none;
 	cursor: pointer;
-	color: var(--ink-soft);
+	color: var(--fav-color, var(--ink-soft));
 	padding: 6px;
 	transition:
 		color 0.15s ease,
@@ -13,10 +13,10 @@
 }
 
 .btn:hover {
-	color: var(--coral);
+	color: var(--fav-hover, var(--coral));
 	transform: scale(1.15);
 }
 
 .btn.active {
-	color: var(--coral);
+	color: var(--fav-active, var(--coral));
 }

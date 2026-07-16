@@ -158,6 +158,16 @@
 	cursor: default;
 }
 
+/* ── favorite ── */
+.fav {
+	flex-shrink: 0;
+	display: grid;
+	place-items: center;
+	--fav-color: rgba(255, 255, 255, 0.85);
+	--fav-hover: #fff;
+	--fav-active: #fff;
+}
+
 /* ── volume ── */
 .vol {
 	flex: 1;

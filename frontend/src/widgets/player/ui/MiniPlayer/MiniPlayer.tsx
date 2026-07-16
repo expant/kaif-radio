@@ -4,6 +4,7 @@ import { IconPlay } from '@/shared/ui/icons/IconPlay';
 import { IconPause } from '@/shared/ui/icons/IconPause';
 import { IconVolume } from '@/shared/ui/icons/IconVolume';
 import { StationAvatar } from '@/shared/ui/StationAvatar/StationAvatar';
+import { FavoriteButton } from '@/features/favorites/ui/FavoriteButton';
 import styles from './MiniPlayer.module.css';
 
 export const MiniPlayer = () => {
@@ -28,6 +29,8 @@ export const MiniPlayer = () => {
 				</div>
 				<div className={styles.sub}>{sub}</div>
 			</div>
+
+			<FavoriteButton station={currentStation} />
 
 			<button
 				className={styles.btn}

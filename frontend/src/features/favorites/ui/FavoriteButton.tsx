@@ -1,6 +1,6 @@
 import type { FavoriteButtonProps } from '../model/types';
 import { useAuth } from '@/features/auth/model/hooks/useAuth';
-import { useFavoriteIds } from '../model/hooks/useFavoriteIds';
+import { useFavorites } from '../model/hooks/useFavorites';
 import { IconHeart } from '@/shared/ui/icons/IconHeart';
 import { Toast } from '@/shared/ui/Toast/Toast';
 import { useState } from 'react';
@@ -8,7 +8,7 @@ import styles from './FavoriteButton.module.css';
 
 export const FavoriteButton = ({ station }: FavoriteButtonProps) => {
 	const { session } = useAuth();
-	const { ids, toggle } = useFavoriteIds();
+	const { ids, toggle } = useFavorites();
 	const [showAuthToast, setShowAuthToast] = useState(false);
 
 	const isFavorited = ids.has(station.stationuuid);
