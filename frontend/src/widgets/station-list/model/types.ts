@@ -7,6 +7,6 @@ export type StationListProps = {
 	error: string | null;
 	currentStationId: string | null;
 	isPlaying: boolean;
-	onSelect: (station: Station) => void;
+	onSelect: (station: Station, accentColor: string) => void;
 	renderFavoriteButton?: (station: Station) => ReactNode;
 };

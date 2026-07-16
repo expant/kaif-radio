@@ -16,6 +16,16 @@ export const STATION_COLORS_HEX: Record<string, string> = {
 	'var(--green)': '#0FB877',
 };
 
+// Стабильный «сид» цвета из идентификатора станции: одна станция — один цвет
+// в любом списке (жанр, избранное), в панели и мини-плеере.
+export const getStationColorSeed = (id: string): number => {
+	let hash = 0;
+	for (let i = 0; i < id.length; i++) {
+		hash = (hash * 31 + id.charCodeAt(i)) | 0;
+	}
+	return Math.abs(hash);
+};
+
 export const getStationColor = (index: number): string =>
 	STATION_COLORS[index % STATION_COLORS.length];
 

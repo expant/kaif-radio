@@ -1,5 +1,9 @@
 import type { CSSProperties } from 'react';
-import { getStationColor } from '../../../../shared/utils/stationColor';
+import {
+	getStationColor,
+	getStationColorHex,
+	getStationColorSeed,
+} from '../../../../shared/utils/stationColor';
 import { IconPlay } from '../../../../shared/ui/icons/IconPlay';
 import { IconListeners } from '../../../../shared/ui/icons/IconListeners';
 import { IconPause } from '../../../../shared/ui/icons/IconPause';
@@ -45,16 +49,18 @@ export const StationList = ({
 
 	return (
 		<ul className={styles.list}>
-			{stations.map((station, index) => {
+			{stations.map((station) => {
 				const isActive = station.stationuuid === currentStationId;
-				const color = getStationColor(index);
+				const seed = getStationColorSeed(station.stationuuid);
+				const color = getStationColor(seed);
+				const colorHex = getStationColorHex(seed);
 
 				return (
 					<li
 						key={station.stationuuid}
 						className={`${styles.row} ${isActive && isPlaying ? styles.playing : ''}`}
 						style={{ '--rc': color } as CSSProperties}
-						onClick={() => onSelect(station)}
+						onClick={() => onSelect(station, colorHex)}
 					>
 						<div className={styles.tile}>
 							<StationAvatar name={station.name} favicon={station.favicon} color={color} />
@@ -82,7 +88,7 @@ export const StationList = ({
 							className={styles.playBtn}
 							onClick={(e) => {
 								e.stopPropagation();
-								onSelect(station);
+								onSelect(station, colorHex);
 							}}
 							aria-label={isActive && isPlaying ? 'Пауза' : 'Играть'}
 						>

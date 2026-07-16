@@ -1,0 +1,125 @@
+.dock {
+	position: fixed;
+	left: 50%;
+	bottom: 20px;
+	transform: translateX(-50%);
+	z-index: 40;
+	width: min(560px, calc(100% - 32px));
+	display: flex;
+	align-items: center;
+	gap: 14px;
+	padding: 12px 16px;
+	border-radius: 22px;
+	background: rgba(255, 255, 255, 0.72);
+	backdrop-filter: blur(16px);
+	-webkit-backdrop-filter: blur(16px);
+	border: 3px solid var(--ink);
+	box-shadow: 6px 6px 0 var(--ink);
+	animation: dockIn 0.35s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+/* ── avatar ── */
+.avatar {
+	width: 46px;
+	height: 46px;
+	flex-shrink: 0;
+	border-radius: 12px;
+	overflow: hidden;
+	font-size: 20px;
+}
+
+/* ── info ── */
+.info {
+	flex: 1;
+	min-width: 0;
+}
+
+.name {
+	font-family: 'Bricolage Grotesque', 'Onest', sans-serif;
+	font-weight: 800;
+	font-size: 16px;
+	letter-spacing: -0.02em;
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+}
+
+.sub {
+	margin-top: 2px;
+	font-size: 12px;
+	font-weight: 600;
+	color: var(--accent, var(--coral));
+	text-transform: uppercase;
+	letter-spacing: 0.08em;
+}
+
+/* ── play/pause ── */
+.btn {
+	width: 44px;
+	height: 44px;
+	flex-shrink: 0;
+	border-radius: 50%;
+	border: 2px solid var(--ink);
+	background: var(--accent, var(--coral));
+	color: #fff;
+	cursor: pointer;
+	display: grid;
+	place-items: center;
+	transition:
+		transform 0.1s ease,
+		box-shadow 0.1s ease;
+	box-shadow: 0 4px 0 rgba(0, 0, 0, 0.22);
+}
+
+.btn:active {
+	transform: translateY(3px);
+	box-shadow: 0 1px 0 rgba(0, 0, 0, 0.22);
+}
+
+/* ── volume ── */
+.vol {
+	display: flex;
+	align-items: center;
+	gap: 8px;
+	flex-shrink: 0;
+	color: var(--ink-soft);
+}
+
+.vol input {
+	width: 84px;
+	-webkit-appearance: none;
+	appearance: none;
+	height: 6px;
+	border-radius: 999px;
+	background: var(--line);
+	cursor: pointer;
+	outline: none;
+}
+
+.vol input::-webkit-slider-thumb {
+	-webkit-appearance: none;
+	width: 16px;
+	height: 16px;
+	border-radius: 50%;
+	background: var(--accent, var(--coral));
+	border: 2px solid var(--ink);
+	cursor: pointer;
+}
+
+/* ── mobile: волну громкости прячем, оставляем суть ── */
+@media (max-width: 560px) {
+	.vol {
+		display: none;
+	}
+}
+
+@keyframes dockIn {
+	from {
+		opacity: 0;
+		transform: translate(-50%, 120%);
+	}
+	to {
+		opacity: 1;
+		transform: translate(-50%, 0);
+	}
+}

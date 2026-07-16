@@ -5,7 +5,6 @@ import { usePagination } from '../../../../features/station-pagination/model/hoo
 import { useGenres } from '../../../../features/genre-filter/model/hooks/useGenres';
 import { useFavoriteIds } from '../../../../features/favorites/model/hooks/useFavoriteIds';
 import { useFavoritesFilter } from '../../../../features/favorites/model/hooks/useFavoritesFilter';
-import { getStationColorHex } from '../../../../shared/utils/stationColor';
 import { FAVORITES_TAG } from '../../../../features/genre-filter/model/constants';
 
 export const useRadioPage = () => {
@@ -32,11 +31,7 @@ export const useRadioPage = () => {
 	const loading = isFavoritesMode ? favLoading : radioLoading;
 	const error = isFavoritesMode ? favError : radioError;
 
-	const currentIndex = player.currentStation
-		? stations.findIndex((s) => s.stationuuid === player.currentStation!.stationuuid)
-		: -1;
-
-	const accentColor = getStationColorHex(currentIndex === -1 ? 0 : currentIndex);
+	const accentColor = player.accentColor;
 
 	return {
 		genre,
