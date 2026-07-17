@@ -8,6 +8,7 @@ import { Toast } from '../../shared/ui/Toast/Toast';
 import { UserControls } from '../../widgets/user-controls/ui/UserControls';
 import { FavoriteButton } from '../../features/favorites/ui/FavoriteButton';
 import { FAVORITES_TAG } from '../../features/genre-filter/model/constants';
+import { isPlaybackActive } from '../../features/playback/model/isPlaybackActive';
 import { useAuth } from '../../features/auth/model/hooks/useAuth';
 import { useRadioPage } from './model/hooks/useRadioPage';
 import type { Station } from '../../entities/station/types';
@@ -92,9 +93,9 @@ export const RadioPage = () => {
 							loading={loading}
 							error={error}
 							currentStationId={player.currentStation?.stationuuid ?? null}
-							isPlaying={player.isPlaying}
+							isPlaybackActive={isPlaybackActive(player.status)}
 							onSelect={(station, color) =>
-								player.play(station, color, isFavoritesMode ? 'избранное' : genre)
+								player.togglePlay(station, color, isFavoritesMode ? 'избранное' : genre)
 							}
 							renderFavoriteButton={renderFavoriteButton}
 						/>

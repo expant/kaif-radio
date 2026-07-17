@@ -9,7 +9,7 @@ export const StationList = ({
 	loading,
 	error,
 	currentStationId,
-	isPlaying,
+	isPlaybackActive,
 	onSelect,
 	renderFavoriteButton,
 }: StationListProps) => {
@@ -48,7 +48,7 @@ export const StationList = ({
 					key={station.stationuuid}
 					station={station}
 					isActive={station.stationuuid === currentStationId}
-					isPlaying={isPlaying}
+					isPlaybackActive={isPlaybackActive}
 					isEntering={entering.has(station.stationuuid)}
 					onSelect={onSelect}
 					renderFavoriteButton={renderFavoriteButton}

@@ -1,16 +1,17 @@
 import type { ReactNode } from 'react';
 import type { Station } from '../../../entities/station/types';
 
+export type PlayerStatus = 'idle' | 'connecting' | 'playing' | 'paused' | 'error';
+
 export type PlayerState = {
 	currentStation: Station | null;
-	isPlaying: boolean;
+	status: PlayerStatus;
 	volume: number;
 	playError: string | null;
 	accentColor: string;
 	genre: string | null;
 	setVolume: (v: number) => void;
-	play: (station: Station, accentColor?: string, genre?: string) => Promise<void>;
-	stop: () => void;
+	togglePlay: (station: Station, accentColor?: string, genre?: string) => Promise<void>;
 };
 
 export type PlayerProviderProps = {
@@ -18,11 +19,15 @@ export type PlayerProviderProps = {
 };
 
 export type PlayPauseButtonProps = {
-	// Размер иконки: панель — крупная, мини-док — компактная.
 	size?: number;
 };
 
 export type VolumeControlProps = {
-	// Размер иконки динамика.
 	size?: number;
+};
+
+export type StatusTextParams = {
+	status: PlayerStatus;
+	playError: string | null;
+	detail?: string | null;
 };

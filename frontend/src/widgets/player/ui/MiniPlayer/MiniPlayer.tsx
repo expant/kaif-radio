@@ -4,16 +4,16 @@ import { PlayPauseButton } from '@/features/playback/ui/PlayPauseButton/PlayPaus
 import { VolumeControl } from '@/features/playback/ui/VolumeControl/VolumeControl';
 import { StationAvatar } from '@/shared/ui/StationAvatar/StationAvatar';
 import { FavoriteButton } from '@/features/favorites/ui/FavoriteButton';
+import { getStatusText } from '@/features/playback/model/statusText';
 import styles from './MiniPlayer.module.css';
 
 export const MiniPlayer = () => {
-	const { currentStation, isPlaying, playError, accentColor, genre } = usePlayer();
+	const { currentStation, status, playError, accentColor, genre } = usePlayer();
 
 	if (!currentStation) return null;
 
 	const accent = accentColor;
-	const status = isPlaying ? 'live' : 'на паузе';
-	const sub = playError ?? (genre ? `${genre} · ${status}` : status);
+	const sub = getStatusText({ status, playError, detail: genre });
 
 	return (
 		<div className={styles.dock} style={{ '--accent': accent } as CSSProperties}>

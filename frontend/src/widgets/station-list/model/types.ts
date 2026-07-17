@@ -6,7 +6,7 @@ export type StationListProps = {
 	loading: boolean;
 	error: string | null;
 	currentStationId: string | null;
-	isPlaying: boolean;
+	isPlaybackActive: boolean;
 	onSelect: (station: Station, accentColor: string) => void;
 	renderFavoriteButton?: (station: Station) => ReactNode;
 };
@@ -14,7 +14,7 @@ export type StationListProps = {
 export type StationItemProps = {
 	station: Station;
 	isActive: boolean;
-	isPlaying: boolean;
+	isPlaybackActive: boolean;
 	isEntering: boolean;
 	onSelect: (station: Station, accentColor: string) => void;
 	renderFavoriteButton?: (station: Station) => ReactNode;

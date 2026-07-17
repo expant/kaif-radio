@@ -14,7 +14,7 @@ import styles from './StationItem.module.css';
 export const StationItem = ({
 	station,
 	isActive,
-	isPlaying,
+	isPlaybackActive,
 	isEntering,
 	onSelect,
 	renderFavoriteButton,
@@ -23,7 +23,7 @@ export const StationItem = ({
 	const color = getStationColor(seed);
 	const colorHex = getStationColorHex(seed);
 
-	const isCurrentPlaying = isActive && isPlaying;
+	const isCurrentPlaying = isActive && isPlaybackActive;
 
 	return (
 		<li

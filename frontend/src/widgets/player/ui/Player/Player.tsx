@@ -5,14 +5,17 @@ import { StationAvatar } from '../../../../shared/ui/StationAvatar/StationAvatar
 import { FavoriteButton } from '../../../../features/favorites/ui/FavoriteButton';
 import { PlayPauseButton } from '../../../../features/playback/ui/PlayPauseButton/PlayPauseButton';
 import { VolumeControl } from '../../../../features/playback/ui/VolumeControl/VolumeControl';
+import { getStatusText } from '../../../../features/playback/model/statusText';
 import styles from './Player.module.css';
 
 export const Player = ({ player, accentColor }: PlayerProps) => {
-	const { currentStation, isPlaying, playError, genre } = player;
+	const { currentStation, status, playError, genre } = player;
+
+	const isLive = status === 'playing';
 
 	return (
 		<aside
-			className={`${styles.panel} ${isPlaying ? styles.isPlaying : ''}`}
+			className={`${styles.panel} ${isLive ? styles.isPlaying : ''}`}
 			style={{ '--accent': accentColor } as CSSProperties}
 		>
 			<div className={styles.head}>
@@ -47,13 +50,7 @@ export const Player = ({ player, accentColor }: PlayerProps) => {
 					{currentStation ? currentStation.name : 'kaifradio'}
 				</div>
 				<div className={styles.sub}>
-					{playError
-						? playError
-						: currentStation
-							? isPlaying
-								? `${currentStation.country} · live`
-								: 'на паузе'
-							: 'выбери станцию из списка'}
+					{getStatusText({ status, playError, detail: currentStation?.country })}
 				</div>
 			</div>
 
@@ -69,7 +66,7 @@ export const Player = ({ player, accentColor }: PlayerProps) => {
 				)}
 			</div>
 
-			<Wave active={isPlaying} />
+			<Wave active={isLive} />
 		</aside>
 	);
 };
