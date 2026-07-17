@@ -56,63 +56,31 @@
 	text-overflow: ellipsis;
 }
 
-/* ── play/pause ── */
-.btn {
-	width: 44px;
-	height: 44px;
-	flex-shrink: 0;
-	border-radius: 50%;
-	border: 2px solid var(--ink);
-	background: var(--accent, var(--coral));
-	color: #fff;
-	cursor: pointer;
-	display: grid;
-	place-items: center;
-	transition:
-		transform 0.1s ease,
-		box-shadow 0.1s ease;
-	box-shadow: 0 4px 0 rgba(0, 0, 0, 0.22);
+/* ── вид фичевых контролов (play/pause + громкость) — через переменные ── */
+.dock {
+	--pp-size: 44px;
+	--pp-bg: var(--accent, var(--coral));
+	--pp-color: #fff;
+	--pp-border: 2px solid var(--ink);
+	--pp-shadow: 0 4px 0 rgba(0, 0, 0, 0.22);
+	--pp-shadow-active: 0 1px 0 rgba(0, 0, 0, 0.22);
+
+	--vol-gap: 8px;
+	--vol-flex: 0 0 auto;
+	--vol-input-flex: 0 0 auto;
+	--vol-width: 84px;
+	--vol-color: var(--ink-soft);
+	--vol-track-h: 6px;
+	--vol-track-bg: var(--line);
+	--vol-thumb: 16px;
+	--vol-thumb-bg: var(--accent, var(--coral));
+	--vol-thumb-border: 2px solid var(--ink);
 }
 
-.btn:active {
-	transform: translateY(3px);
-	box-shadow: 0 1px 0 rgba(0, 0, 0, 0.22);
-}
-
-/* ── volume ── */
-.vol {
-	display: flex;
-	align-items: center;
-	gap: 8px;
-	flex-shrink: 0;
-	color: var(--ink-soft);
-}
-
-.vol input {
-	width: 84px;
-	-webkit-appearance: none;
-	appearance: none;
-	height: 6px;
-	border-radius: 999px;
-	background: var(--line);
-	cursor: pointer;
-	outline: none;
-}
-
-.vol input::-webkit-slider-thumb {
-	-webkit-appearance: none;
-	width: 16px;
-	height: 16px;
-	border-radius: 50%;
-	background: var(--accent, var(--coral));
-	border: 2px solid var(--ink);
-	cursor: pointer;
-}
-
-/* ── mobile: волну громкости прячем, оставляем суть ── */
+/* ── mobile: громкость прячем, оставляем суть ── */
 @media (max-width: 560px) {
-	.vol {
-		display: none;
+	.dock {
+		--vol-display: none;
 	}
 }
 

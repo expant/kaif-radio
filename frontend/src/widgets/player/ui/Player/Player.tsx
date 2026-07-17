@@ -1,21 +1,14 @@
 import type { CSSProperties } from 'react';
 import type { PlayerProps } from '../../model/types';
-import { IconPlay } from '../../../../shared/ui/icons/IconPlay';
-import { IconPause } from '../../../../shared/ui/icons/IconPause';
-import { IconVolume } from '../../../../shared/ui/icons/IconVolume';
 import { Wave } from '../../../../shared/ui/Wave/Wave';
 import { StationAvatar } from '../../../../shared/ui/StationAvatar/StationAvatar';
 import { FavoriteButton } from '../../../../features/favorites/ui/FavoriteButton';
+import { PlayPauseButton } from '../../../../features/playback/ui/PlayPauseButton/PlayPauseButton';
+import { VolumeControl } from '../../../../features/playback/ui/VolumeControl/VolumeControl';
 import styles from './Player.module.css';
 
 export const Player = ({ player, accentColor }: PlayerProps) => {
-	const { currentStation, isPlaying, volume, playError, genre, setVolume, play, stop } = player;
-
-	const handlePlayPause = () => {
-		if (!currentStation) return;
-		if (isPlaying) stop();
-		else play(currentStation);
-	};
+	const { currentStation, isPlaying, playError, genre } = player;
 
 	return (
 		<aside
@@ -65,25 +58,9 @@ export const Player = ({ player, accentColor }: PlayerProps) => {
 			</div>
 
 			<div className={styles.controls}>
-				<button
-					className={styles.mainBtn}
-					onClick={handlePlayPause}
-					disabled={!currentStation}
-					aria-label={isPlaying ? 'Пауза' : 'Играть'}
-				>
-					{isPlaying ? <IconPause size={30} /> : <IconPlay size={30} />}
-				</button>
-				<div className={styles.vol}>
-					<IconVolume size={22} />
-					<input
-						type="range"
-						min={0}
-						max={1}
-						step={0.01}
-						value={volume}
-						onChange={(e) => setVolume(Number(e.target.value))}
-					/>
-				</div>
+				<PlayPauseButton size={30} />
+
+				<VolumeControl size={22} />
 
 				{currentStation && (
 					<span className={styles.fav}>

@@ -1,15 +1,13 @@
 import type { CSSProperties } from 'react';
-import { usePlayer } from '../../model/hooks/usePlayer';
-import { IconPlay } from '@/shared/ui/icons/IconPlay';
-import { IconPause } from '@/shared/ui/icons/IconPause';
-import { IconVolume } from '@/shared/ui/icons/IconVolume';
+import { usePlayer } from '@/features/playback/model/hooks/usePlayer';
+import { PlayPauseButton } from '@/features/playback/ui/PlayPauseButton/PlayPauseButton';
+import { VolumeControl } from '@/features/playback/ui/VolumeControl/VolumeControl';
 import { StationAvatar } from '@/shared/ui/StationAvatar/StationAvatar';
 import { FavoriteButton } from '@/features/favorites/ui/FavoriteButton';
 import styles from './MiniPlayer.module.css';
 
 export const MiniPlayer = () => {
-	const { currentStation, isPlaying, volume, playError, accentColor, genre, setVolume, play } =
-		usePlayer();
+	const { currentStation, isPlaying, playError, accentColor, genre } = usePlayer();
 
 	if (!currentStation) return null;
 
@@ -32,26 +30,9 @@ export const MiniPlayer = () => {
 
 			<FavoriteButton station={currentStation} />
 
-			<button
-				className={styles.btn}
-				onClick={() => play(currentStation)}
-				aria-label={isPlaying ? 'Пауза' : 'Играть'}
-			>
-				{isPlaying ? <IconPause size={22} /> : <IconPlay size={22} />}
-			</button>
+			<PlayPauseButton size={22} />
 
-			<div className={styles.vol}>
-				<IconVolume size={18} />
-				<input
-					type="range"
-					min={0}
-					max={1}
-					step={0.01}
-					value={volume}
-					onChange={(e) => setVolume(Number(e.target.value))}
-					aria-label="Громкость"
-				/>
-			</div>
+			<VolumeControl size={18} />
 		</div>
 	);
 };

@@ -1,0 +1,37 @@
+/* Вид задаётся потребителем через CSS-переменные; дефолты — крупный
+   контрол панели плеера (растягивается по свободному месту). */
+.control {
+	display: var(--vol-display, flex);
+	align-items: center;
+	gap: var(--vol-gap, 10px);
+	flex: var(--vol-flex, 1);
+	min-width: 0;
+	color: var(--vol-color, inherit);
+}
+
+.control svg {
+	flex-shrink: 0;
+}
+
+.control input {
+	flex: var(--vol-input-flex, 1);
+	width: var(--vol-width, auto);
+	min-width: 0;
+	-webkit-appearance: none;
+	appearance: none;
+	height: var(--vol-track-h, 7px);
+	border-radius: 999px;
+	background: var(--vol-track-bg, rgba(0, 0, 0, 0.25));
+	cursor: pointer;
+	outline: none;
+}
+
+.control input::-webkit-slider-thumb {
+	-webkit-appearance: none;
+	width: var(--vol-thumb, 20px);
+	height: var(--vol-thumb, 20px);
+	border-radius: 50%;
+	background: var(--vol-thumb-bg, #fff);
+	border: var(--vol-thumb-border, 3px solid var(--ink));
+	cursor: pointer;
+}

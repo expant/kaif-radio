@@ -1,0 +1,28 @@
+/* Вид задаётся потребителем через CSS-переменные; дефолты — крупная
+   белая кнопка панели плеера. */
+.btn {
+	width: var(--pp-size, 74px);
+	height: var(--pp-size, 74px);
+	border-radius: 50%;
+	background: var(--pp-bg, #fff);
+	color: var(--pp-color, var(--ink));
+	border: var(--pp-border, none);
+	cursor: pointer;
+	flex-shrink: 0;
+	display: grid;
+	place-items: center;
+	box-shadow: var(--pp-shadow, 0 8px 0 rgba(0, 0, 0, 0.25));
+	transition:
+		transform 0.1s ease,
+		box-shadow 0.1s ease;
+}
+
+.btn:active:not(:disabled) {
+	transform: translateY(5px);
+	box-shadow: var(--pp-shadow-active, 0 3px 0 rgba(0, 0, 0, 0.25));
+}
+
+.btn:disabled {
+	opacity: 0.4;
+	cursor: default;
+}

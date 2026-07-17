@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { usePlayer } from '../../../../widgets/player/model/hooks/usePlayer';
+import { usePlayer } from '../../../../features/playback/model/hooks/usePlayer';
 import { useStations } from '../../../../shared/hooks/useStations';
 import { usePagination } from '../../../../features/station-pagination/model/hooks/usePagination';
 import { useGenres } from '../../../../features/genre-filter/model/hooks/useGenres';
