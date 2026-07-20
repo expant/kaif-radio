@@ -14,6 +14,7 @@ export const getStatusText = ({ status, playError, detail }: StatusTextParams): 
 			return 'выбери станцию из списка';
 		default: {
 			const word = STATUS_WORD[status];
+
 			return detail ? `${detail} · ${word}` : word;
 		}
 	}

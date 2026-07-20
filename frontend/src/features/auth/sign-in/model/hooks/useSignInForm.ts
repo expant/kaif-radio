@@ -8,15 +8,20 @@ export const useSignInForm = () => {
 
 	const validate = () => {
 		if (!email.trim()) return 'введи email';
+
 		if (!/\S+@\S+\.\S+/.test(email)) return 'email выглядит неправильно';
+
 		if (!password) return 'введи пароль';
+
 		return null;
 	};
 
 	const handleSubmit = async () => {
 		const validationError = validate();
 		if (validationError) return validationError;
+
 		await submit(email, password);
+
 		return null;
 	};
 

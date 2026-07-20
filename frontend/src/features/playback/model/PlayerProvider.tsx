@@ -17,6 +17,7 @@ export const PlayerProvider = ({ children }: PlayerProviderProps) => {
 		if (currentStation?.stationuuid === station.stationuuid) {
 			if (isPlaybackActive(engine.status)) engine.pause();
 			else engine.resume();
+
 			return;
 		}
 

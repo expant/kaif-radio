@@ -15,6 +15,7 @@ export const useGenres = () => {
 
 		if (genres.includes(genre)) {
 			setValidationError('такой жанр уже есть в списке');
+
 			return;
 		}
 
@@ -26,6 +27,7 @@ export const useGenres = () => {
 
 			if (count === 0) {
 				setValidationError('станций с таким жанром не нашлось — попробуй другой');
+
 				return;
 			}
 

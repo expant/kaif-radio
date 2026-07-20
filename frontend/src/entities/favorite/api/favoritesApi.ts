@@ -10,6 +10,7 @@ export const getFavorites = async (userId: string): Promise<Favorite[]> => {
 		.order('created_at', { ascending: false });
 
 	if (error) throw error;
+
 	return data;
 };
 

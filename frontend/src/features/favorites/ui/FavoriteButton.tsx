@@ -17,8 +17,10 @@ export const FavoriteButton = ({ station }: FavoriteButtonProps) => {
 		e.stopPropagation();
 		if (!session) {
 			setShowAuthToast(true);
+
 			return;
 		}
+
 		toggle(station);
 	};
 

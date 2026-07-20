@@ -23,6 +23,7 @@ export const getStationColorSeed = (id: string): number => {
 	for (let i = 0; i < id.length; i++) {
 		hash = (hash * 31 + id.charCodeAt(i)) | 0;
 	}
+
 	return Math.abs(hash);
 };
 

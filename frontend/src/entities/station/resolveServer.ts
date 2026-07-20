@@ -13,6 +13,7 @@ export const resolveBaseUrl = async (): Promise<string> => {
 
 		if (hosts.length > 0) {
 			cachedBaseUrl = `https://${hosts[0].name}/json`;
+
 			return cachedBaseUrl;
 		}
 	} catch {
@@ -27,6 +28,7 @@ export const resolveBaseUrl = async (): Promise<string> => {
 
 			if (res.ok) {
 				cachedBaseUrl = `${server}/json`;
+
 				return cachedBaseUrl;
 			}
 		} catch {
@@ -35,5 +37,6 @@ export const resolveBaseUrl = async (): Promise<string> => {
 	}
 
 	cachedBaseUrl = `${FALLBACK_SERVERS[0]}/json`;
+
 	return cachedBaseUrl;
 };

@@ -14,6 +14,7 @@ export const UpdateUsernameForm = ({ currentUsername, onClose }: UpdateUsernameF
 
 		if (!value.trim() || value.trim() === currentUsername) {
 			onClose();
+
 			return;
 		}
 

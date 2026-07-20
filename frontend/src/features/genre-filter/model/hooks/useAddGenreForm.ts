@@ -10,6 +10,7 @@ export const useAddGenreForm = (onAdd: (genre: string) => void) => {
 
 	const handleSubmit = () => {
 		if (!value.trim()) return;
+
 		onAdd(value);
 		setValue('');
 		setOpen(false);
@@ -18,8 +19,10 @@ export const useAddGenreForm = (onAdd: (genre: string) => void) => {
 	const handleBlur = () => {
 		if (!value.trim()) {
 			setOpen(false);
+
 			return;
 		}
+
 		handleSubmit();
 	};
 

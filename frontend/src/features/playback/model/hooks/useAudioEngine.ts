@@ -32,6 +32,7 @@ export const useAudioEngine = (): AudioEngine => {
 	// Провал попытки: повтор по расписанию или честная ошибка.
 	const handleFailure = (actionToken: number) => {
 		if (!token.isCurrent(actionToken)) return;
+
 		if (retryTimer.isActive()) return;
 
 		connectTimer.clear();
@@ -41,11 +42,13 @@ export const useAudioEngine = (): AudioEngine => {
 		if (delayMs === null) {
 			setStatus('error');
 			setPlayError('станция не отвечает');
+
 			return;
 		}
 
 		retryTimer.start(() => {
 			if (!token.isCurrent(actionToken)) return;
+
 			const audio = audioRef.current;
 			if (audio) attemptConnect(audio, actionToken, true);
 		}, delayMs);

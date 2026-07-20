@@ -11,6 +11,7 @@ export const PlayPauseButton = ({ size = 30 }: PlayPauseButtonProps) => {
 
 	const handleClick = () => {
 		if (!currentStation) return;
+
 		togglePlay(currentStation);
 	};
 

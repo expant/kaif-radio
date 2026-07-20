@@ -13,7 +13,9 @@ const fetchStationByUuid = async (baseUrl: string, uuid: string): Promise<Statio
 			signal: AbortSignal.timeout(5000),
 		});
 		if (!response.ok) return null;
+
 		const data: Station[] = await response.json();
+
 		return data[0] ?? null;
 	} catch {
 		return null;
@@ -22,8 +24,10 @@ const fetchStationByUuid = async (baseUrl: string, uuid: string): Promise<Statio
 
 const fetchStationsByUuids = async (uuids: string[]): Promise<Station[]> => {
 	if (uuids.length === 0) return [];
+
 	const baseUrl = await resolveBaseUrl();
 	const results = await Promise.all(uuids.map((uuid) => fetchStationByUuid(baseUrl, uuid)));
+
 	return results.filter((s): s is Station => s !== null);
 };
 
@@ -61,6 +65,7 @@ export const FavoritesProvider = ({ children }: FavoritesProviderProps) => {
 					setIds(new Set());
 					setStations([]);
 				}
+
 				return;
 			}
 
@@ -82,6 +87,7 @@ export const FavoritesProvider = ({ children }: FavoritesProviderProps) => {
 
 	const ensureLoaded = useCallback(async () => {
 		if (loadedRef.current || !session) return;
+
 		loadedRef.current = true;
 
 		setLoading(true);
@@ -92,6 +98,7 @@ export const FavoritesProvider = ({ children }: FavoritesProviderProps) => {
 
 			if (favorites.length === 0) {
 				setStations([]);
+
 				return;
 			}
 
@@ -120,11 +127,14 @@ export const FavoritesProvider = ({ children }: FavoritesProviderProps) => {
 				const next = new Set(prev);
 				if (isFavorited) next.delete(station.stationuuid);
 				else next.add(station.stationuuid);
+
 				return next;
 			});
 			setStations((prev) => {
 				if (isFavorited) return prev.filter((s) => s.stationuuid !== station.stationuuid);
+
 				if (prev.some((s) => s.stationuuid === station.stationuuid)) return prev;
+
 				return [station, ...prev];
 			});
 
@@ -140,10 +150,12 @@ export const FavoritesProvider = ({ children }: FavoritesProviderProps) => {
 					const next = new Set(prev);
 					if (isFavorited) next.add(station.stationuuid);
 					else next.delete(station.stationuuid);
+
 					return next;
 				});
 				setStations((prev) => {
 					if (isFavorited) return [station, ...prev];
+
 					return prev.filter((s) => s.stationuuid !== station.stationuuid);
 				});
 			}
