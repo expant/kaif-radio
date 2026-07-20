@@ -1,13 +1,14 @@
 import { createContext } from 'react';
+import { DEFAULT_ACCENT, INITIAL_VOLUME } from './constants';
 import type { PlayerState } from './types';
 
 export const PlayerContext = createContext<PlayerState>({
 	currentStation: null,
 	status: 'idle',
-	volume: 0.8,
+	volume: INITIAL_VOLUME,
 	playError: null,
-	accentColor: '#FF5A3C',
+	accentColor: DEFAULT_ACCENT,
 	genre: null,
 	setVolume: () => {},
-	togglePlay: async () => {},
+	togglePlay: () => {},
 });
