@@ -1,9 +1,6 @@
-type Props = {
-	filled: boolean;
-	size?: number | string;
-};
+import type { IconHeartProps } from './types';
 
-export const IconHeart = ({ filled, size = '1em' }: Props) => (
+export const IconHeart = ({ filled, size = '1em' }: IconHeartProps) => (
 	<svg
 		viewBox="0 0 24 24"
 		fill={filled ? 'currentColor' : 'none'}

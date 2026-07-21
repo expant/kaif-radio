@@ -23,11 +23,31 @@ export default defineConfig([
       '@stylistic': stylistic,
     },
     rules: {
+      // interface запрещён — только type
+      '@typescript-eslint/consistent-type-definitions': ['error', 'type'],
       // вертикальный ритм: пустая строка после if (в т.ч. guard) и перед return
       '@stylistic/padding-line-between-statements': [
         'error',
         { blankLine: 'always', prev: 'if', next: '*' },
         { blankLine: 'always', prev: '*', next: 'return' },
+      ],
+    },
+  },
+  {
+    // определения типов — только в types.ts
+    files: ['**/*.{ts,tsx}'],
+    ignores: ['**/types.ts'],
+    rules: {
+      'no-restricted-syntax': [
+        'error',
+        {
+          selector: 'TSTypeAliasDeclaration',
+          message: 'Определения типов выносятся в отдельный файл types.ts',
+        },
+        {
+          selector: 'TSInterfaceDeclaration',
+          message: 'interface запрещён; определения типов — в types.ts',
+        },
       ],
     },
   },

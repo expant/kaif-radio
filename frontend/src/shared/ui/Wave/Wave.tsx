@@ -1,11 +1,8 @@
 import { useEffect, useRef } from 'react';
+import type { WaveProps } from './types';
 import styles from './Wave.module.css';
 
-type Props = {
-	active: boolean;
-};
-
-export const Wave = ({ active }: Props) => {
+export const Wave = ({ active }: WaveProps) => {
 	const barsRef = useRef<HTMLDivElement>(null);
 
 	useEffect(() => {

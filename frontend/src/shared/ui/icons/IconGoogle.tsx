@@ -1,8 +1,6 @@
-type Props = {
-	size?: number | string;
-};
+import type { IconProps } from './types';
 
-export const IconGoogle = ({ size = '1em' }: Props) => (
+export const IconGoogle = ({ size = '1em' }: IconProps) => (
 	<svg viewBox="0 0 24 24" width={size} height={size}>
 		<path
 			fill="#EA4335"

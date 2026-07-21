@@ -2,9 +2,8 @@ import { useState } from 'react';
 import { Link } from 'react-router';
 import { SignInForm } from '@/features/auth/sign-in/ui/SignInForm/SignInForm';
 import { SignUpForm } from '@/features/auth/sign-up/ui/SignUpForm/SignUpForm';
+import type { AuthMode } from './types';
 import styles from './AuthPage.module.css';
-
-type AuthMode = 'sign-in' | 'sign-up';
 
 export const AuthPage = () => {
 	const [mode, setMode] = useState<AuthMode>('sign-in');
