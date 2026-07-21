@@ -5,6 +5,7 @@ import { usePagination } from '../../../../features/station-pagination/model/hoo
 import { useGenres } from '../../../../features/genre-filter/model/hooks/useGenres';
 import { useFavorites } from '../../../../features/favorites/model/hooks/useFavorites';
 import { FAVORITES_TAG } from '../../../../features/genre-filter/model/constants';
+import { PAGE_SIZE } from '../../../../shared/constants/pagination';
 
 export const useRadioPage = () => {
 	const [genre, setGenre] = useState('lofi');
@@ -12,12 +13,15 @@ export const useRadioPage = () => {
 	const isFavoritesMode = genre === FAVORITES_TAG;
 
 	const { genres, validating, validationError, addGenre, removeGenre, clearError } = useGenres();
-	const { page, totalPages, totalCount, setPage } = usePagination(isFavoritesMode ? '' : genre);
+	const { page, setPage } = usePagination(isFavoritesMode ? '' : genre);
 	const {
 		stations: radioStations,
+		totalCount,
 		loading: radioLoading,
 		error: radioError,
 	} = useStations(isFavoritesMode ? '' : genre, page);
+
+	const totalPages = Math.max(1, Math.ceil(totalCount / PAGE_SIZE));
 	const {
 		stations: favoriteStations,
 		loading: favLoading,

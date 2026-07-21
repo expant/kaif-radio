@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { useLocalStorage } from '../../../../shared/hooks/useLocalStorage';
-import { fetchStationCount } from '../../../../entities/station/api';
+import { fetchStations } from '../../../../entities/station/api';
 import { DEFAULT_GENRES, GENRES_STORAGE_KEY } from '../constants';
 
 export const useGenres = () => {
@@ -23,9 +23,9 @@ export const useGenres = () => {
 		setValidationError(null);
 
 		try {
-			const count = await fetchStationCount(genre);
+			const { totalCount } = await fetchStations(genre, 1);
 
-			if (count === 0) {
+			if (totalCount === 0) {
 				setValidationError('станций с таким жанром не нашлось — попробуй другой');
 
 				return;

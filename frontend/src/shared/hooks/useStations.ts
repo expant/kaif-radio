@@ -1,9 +1,10 @@
 import { useState, useEffect } from 'react';
-import { fetchStationsByTag } from '../../entities/station/api';
+import { fetchStations } from '../../entities/station/api';
 import type { Station } from '../../entities/station/types';
 
 export const useStations = (tag: string, page: number) => {
 	const [stations, setStations] = useState<Station[]>([]);
+	const [totalCount, setTotalCount] = useState(0);
 	const [loading, setLoading] = useState(false);
 	const [error, setError] = useState<string | null>(null);
 
@@ -13,8 +14,10 @@ export const useStations = (tag: string, page: number) => {
 			setError(null);
 
 			try {
-				const data = await fetchStationsByTag(tag, page);
-				setStations(data);
+				const data = await fetchStations(tag, page);
+
+				setStations(data.stations);
+				setTotalCount(data.totalCount);
 			} catch (e) {
 				setError((e as Error).message);
 			} finally {
@@ -25,5 +28,5 @@ export const useStations = (tag: string, page: number) => {
 		load();
 	}, [tag, page]);
 
-	return { stations, loading, error };
+	return { stations, totalCount, loading, error };
 };

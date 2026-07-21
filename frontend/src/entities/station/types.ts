@@ -9,3 +9,9 @@ export type Station = {
 	votes: number;
 	bitrate: number;
 };
+
+// Ответ бэкенда на GET /stations — список и общее число одним объектом.
+export type StationsResponse = {
+	stations: Station[];
+	totalCount: number;
+};

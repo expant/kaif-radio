@@ -1,28 +1,16 @@
-import { useState, useEffect } from 'react';
-import { fetchStationCount } from '../../../../entities/station/api';
-import { PAGE_SIZE } from '../../../../shared/constants/pagination';
+import { useState } from 'react';
 
+// Только состояние страницы. Счётчик станций теперь приходит вместе со списком
+// (useStations), поэтому пагинация больше не ходит в сеть.
 export const usePagination = (tag: string) => {
 	const [page, setPage] = useState(1);
-	const [totalPages, setTotalPages] = useState(1);
-	const [totalCount, setTotalCount] = useState(0);
+	const [prevTag, setPrevTag] = useState(tag);
 
-	useEffect(() => {
-		const load = async () => {
-			setPage(1);
+	// сброс на первую страницу при смене жанра — паттерн React (правка во время рендера)
+	if (tag !== prevTag) {
+		setPrevTag(tag);
+		setPage(1);
+	}
 
-			try {
-				const count = await fetchStationCount(tag);
-				setTotalCount(count);
-				setTotalPages(Math.max(1, Math.ceil(count / PAGE_SIZE)));
-			} catch {
-				setTotalCount(0);
-				setTotalPages(1);
-			}
-		};
-
-		load();
-	}, [tag]);
-
-	return { page, totalPages, totalCount, setPage };
+	return { page, setPage };
 };
