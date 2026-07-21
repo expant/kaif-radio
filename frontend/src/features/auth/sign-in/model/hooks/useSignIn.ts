@@ -11,7 +11,7 @@ export const useSignIn = () => {
 
 		try {
 			await signIn(email, password);
-		} catch (e) {
+		} catch {
 			setError('неверный email или пароль');
 		} finally {
 			setLoading(false);
