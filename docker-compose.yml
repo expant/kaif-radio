@@ -1,0 +1,19 @@
+services:
+  backend:
+    build: ./backend
+    ports:
+      - '3000:3000'
+    environment:
+      - PORT=3000
+    # Монтируем только исходники — hot-reload без пересборки образа.
+    # node_modules остаётся из образа (его не перекрываем).
+    volumes:
+      - ./backend/src:/app/src
+    depends_on:
+      - redis
+
+  # Redis пока просто стоит рядом — задействуем на фазе кеша.
+  redis:
+    image: redis:7-alpine
+    ports:
+      - '6379:6379'
