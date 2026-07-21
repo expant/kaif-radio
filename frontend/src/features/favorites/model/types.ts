@@ -7,7 +7,7 @@ export type FavoriteButtonProps = {
 
 export type StationListFavoriteSlot = (station: Station) => ReactNode;
 
-// Станция из избранного; unavailable — сохранена, но сейчас не отдаётся radio-browser.
+// Станция из избранного; unavailable — сохранена, но сейчас не отдаётся источником станций.
 export type FavoriteStation = Station & { unavailable?: boolean };
 
 export type FavoritesContextType = {

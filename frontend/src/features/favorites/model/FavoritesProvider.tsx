@@ -1,35 +1,11 @@
 import { useState, useEffect, useRef, useCallback } from 'react';
 import { useAuth } from '@/features/auth/model/hooks/useAuth';
 import { getFavorites, addFavorite, removeFavorite } from '@/entities/favorite/api/favoritesApi';
-import { resolveBaseUrl } from '@/entities/station/resolveServer';
+import { fetchStationsByUuids } from '@/entities/station/api';
 import type { Station } from '@/entities/station/types';
 import type { Favorite } from '@/entities/favorite/model/types';
 import { FavoritesContext } from './context';
 import type { FavoriteStation, FavoritesProviderProps } from './types';
-
-const fetchStationByUuid = async (baseUrl: string, uuid: string): Promise<Station | null> => {
-	try {
-		const response = await fetch(`${baseUrl}/stations/byuuid/${uuid}`, {
-			signal: AbortSignal.timeout(5000),
-		});
-		if (!response.ok) return null;
-
-		const data: Station[] = await response.json();
-
-		return data[0] ?? null;
-	} catch {
-		return null;
-	}
-};
-
-const fetchStationsByUuids = async (uuids: string[]): Promise<Station[]> => {
-	if (uuids.length === 0) return [];
-
-	const baseUrl = await resolveBaseUrl();
-	const results = await Promise.all(uuids.map((uuid) => fetchStationByUuid(baseUrl, uuid)));
-
-	return results.filter((s): s is Station => s !== null);
-};
 
 const toUnavailable = (f: Favorite): FavoriteStation => ({
 	stationuuid: f.station_uuid,
@@ -51,7 +27,7 @@ export const FavoritesProvider = ({ children }: FavoritesProviderProps) => {
 	const [loading, setLoading] = useState(false);
 	const [error, setError] = useState<string | null>(null);
 
-	// Полный список станций (тяжёлый резолв через radio-browser) грузим лениво —
+	// Полный список станций (тяжёлый резолв через API станций) грузим лениво —
 	// только когда пользователь открыл вкладку «избранное».
 	const loadedRef = useRef(false);
 
