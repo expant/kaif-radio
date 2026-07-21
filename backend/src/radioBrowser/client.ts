@@ -46,3 +46,46 @@ export const fetchStationsByGenre = async (genre: string, page: number): Promise
 
 	return res.json();
 };
+
+// Общее число станций жанра — для пагинации и счётчика «станций в эфире».
+export const fetchStationCount = async (genre: string): Promise<number> => {
+	const baseUrl = await resolveBaseUrl();
+
+	const res = await fetch(`${baseUrl}/tags/${encodeURIComponent(genre)}`, {
+		signal: AbortSignal.timeout(8000),
+	});
+
+	if (!res.ok) throw new Error(`radio-browser responded ${res.status}`);
+
+	const tags = (await res.json()) as Array<{ name: string; stationcount: number }>;
+	const exact = tags.find((t) => t.name.toLowerCase() === genre.toLowerCase());
+
+	return exact?.stationcount ?? 0;
+};
+
+// Одна станция по её uuid; null, если не нашлась или отвалилась.
+const fetchStationByUuid = async (baseUrl: string, uuid: string): Promise<unknown> => {
+	try {
+		const res = await fetch(`${baseUrl}/stations/byuuid/${uuid}`, {
+			signal: AbortSignal.timeout(5000),
+		});
+
+		if (!res.ok) return null;
+
+		const data = (await res.json()) as unknown[];
+
+		return data[0] ?? null;
+	} catch {
+		return null;
+	}
+};
+
+// Разворачивает список uuid (из избранного) в полные станции — те, что ещё живы.
+export const fetchStationsByUuids = async (uuids: string[]): Promise<unknown[]> => {
+	if (uuids.length === 0) return [];
+
+	const baseUrl = await resolveBaseUrl();
+	const results = await Promise.all(uuids.map((uuid) => fetchStationByUuid(baseUrl, uuid)));
+
+	return results.filter((s) => s !== null);
+};
