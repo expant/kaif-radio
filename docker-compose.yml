@@ -5,6 +5,7 @@ services:
       - '3000:3000'
     environment:
       - PORT=3000
+      - REDIS_URL=redis://redis:6379
     # Монтируем только исходники — hot-reload без пересборки образа.
     # node_modules остаётся из образа (его не перекрываем).
     volumes:
@@ -12,7 +13,8 @@ services:
     depends_on:
       - redis
 
-  # Redis пока просто стоит рядом — задействуем на фазе кеша.
+  # Персистентность каталога станций: backend поднимает прошлый каталог из
+  # Redis мгновенно при старте, не дожидаясь сетевой выгрузки.
   redis:
     image: redis:7-alpine
     ports:

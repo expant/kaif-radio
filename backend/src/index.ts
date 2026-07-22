@@ -10,7 +10,7 @@ const start = async () => {
 		// host 0.0.0.0 обязателен внутри Docker — иначе порт не виден снаружи контейнера.
 		await app.listen({ port: PORT, host: '0.0.0.0' });
 
-		startStationRefresh();
+		await startStationRefresh();
 	} catch (err) {
 		app.log.error(err);
 		process.exit(1);

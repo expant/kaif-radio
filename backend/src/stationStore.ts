@@ -1,4 +1,5 @@
 import { fetchAllStations } from './radioBrowser/client.js';
+import { loadCatalog, saveCatalog } from './stationCache.js';
 import type { Station } from './radioBrowser/types.js';
 
 const PAGE_SIZE = 30;
@@ -23,14 +24,30 @@ const trim = (s: Station): Station => ({
 const hasTag = (station: Station, genre: string): boolean =>
 	station.tags.split(',').some((t) => t.trim().toLowerCase() === genre);
 
-// Обновить память из radio-browser.
+// Наполнить память готовым списком станций (из сети или из кеша).
+const setCatalog = (stations: Station[]): void => {
+	all = stations;
+	byUuid = new Map(stations.map((s) => [s.stationuuid, s]));
+};
+
+// Обновить память из radio-browser и сохранить свежий каталог в Redis.
 export const refreshStations = async (): Promise<void> => {
 	const raw = await fetchAllStations();
-	const trimmed = raw.map(trim);
 
-	all = trimmed;
-	byUuid = new Map(trimmed.map((s) => [s.stationuuid, s]));
+	setCatalog(raw.map(trim));
 	lastRefreshedAt = new Date().toISOString();
+
+	await saveCatalog(all);
+};
+
+// Мгновенный прогрев из Redis: поднимаем прошлый каталог, пока идёт первый
+// сетевой refresh. lastRefreshedAt не трогаем — данные ещё не свежие.
+const warmFromCache = async (): Promise<void> => {
+	const cached = await loadCatalog();
+
+	if (!cached) return;
+
+	setCatalog(cached);
 };
 
 // Метаданные каталога для /health: прогрет ли и когда обновлялся.
@@ -52,8 +69,11 @@ export const getStationsByGenre = (genre: string, page: number) => {
 export const getStationsByUuids = (ids: string[]): Station[] =>
 	ids.map((id) => byUuid.get(id)).filter((s): s is Station => s !== undefined);
 
-// Выгрузка при старте + обновление раз в час. Ошибки не роняют процесс.
-export const startStationRefresh = (): void => {
+// Старт: прогрев из кеша → фоновая выгрузка из сети → обновление раз в час.
+// Ошибки сети не роняют процесс.
+export const startStationRefresh = async (): Promise<void> => {
+	await warmFromCache();
+
 	refreshStations().catch((err) =>
 		console.error('Первая выгрузка станций не удалась:', err),
 	);
