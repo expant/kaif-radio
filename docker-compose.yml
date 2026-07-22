@@ -1,4 +1,17 @@
 services:
+  # SPA: собирается Vite'ом с прод-переменными, статику раздаёт nginx на :80.
+  frontend:
+    build:
+      context: ./frontend
+      args:
+        VITE_API_URL: ${VITE_API_URL}
+        VITE_SUPABASE_URL: ${VITE_SUPABASE_URL}
+        VITE_SUPABASE_ANON_KEY: ${VITE_SUPABASE_ANON_KEY}
+    ports:
+      - '80:80'
+    depends_on:
+      - backend
+
   backend:
     build: ./backend
     ports:
