@@ -1,91 +1,25 @@
-// Шов данных станций на бэкенде: единственное место, знающее про radio-browser.
-// Позже сюда добавится кеш (Redis) и фильтрация; наружу отдаём готовые станции.
+// Единственное место, знающее про radio-browser. Отдаёт весь рабочий список —
+// тяжёлый запрос, выполняется периодически, не на каждый запрос юзера.
+import { SERVERS } from './data.js';
+import type { Station } from './types.js';
 
-const SERVERS = [
-	'https://de1.api.radio-browser.info',
-	'https://nl1.api.radio-browser.info',
-	'https://at1.api.radio-browser.info',
-];
+const SEARCH_PATH =
+	'/json/stations/search?hidebroken=true&order=votes&reverse=true&limit=100000';
 
-const PAGE_SIZE = 30;
-
-let cachedBaseUrl: string | null = null;
-
-// Выбираем рабочее зеркало и запоминаем его на время жизни процесса.
-const resolveBaseUrl = async (): Promise<string> => {
-	if (cachedBaseUrl) return cachedBaseUrl;
-
+// Перебираем зеркала по очереди: ответило ошибкой (502) или отвалилось —
+// идём к следующему. Успех = первое зеркало, вернувшее данные.
+export const fetchAllStations = async (): Promise<Station[]> => {
 	for (const server of SERVERS) {
 		try {
-			const res = await fetch(`${server}/json/stats`, { signal: AbortSignal.timeout(3000) });
+			const res = await fetch(`${server}${SEARCH_PATH}`, {
+				signal: AbortSignal.timeout(60000),
+			});
 
-			if (res.ok) {
-				cachedBaseUrl = `${server}/json`;
-
-				return cachedBaseUrl;
-			}
+			if (res.ok) return await res.json();
 		} catch {
-			continue;
+			// таймаут/обрыв — пробуем следующее зеркало
 		}
 	}
 
-	// Все недоступны — вернём первый, ошибку обработает вызывающий.
-	return `${SERVERS[0]}/json`;
-};
-
-export const fetchStationsByGenre = async (genre: string, page: number): Promise<unknown> => {
-	const baseUrl = await resolveBaseUrl();
-	const offset = (page - 1) * PAGE_SIZE;
-
-	const res = await fetch(
-		`${baseUrl}/stations/bytag/${encodeURIComponent(genre)}?limit=${PAGE_SIZE}&offset=${offset}&hidebroken=true&order=votes&reverse=true`,
-		{ signal: AbortSignal.timeout(8000) },
-	);
-
-	if (!res.ok) throw new Error(`radio-browser responded ${res.status}`);
-
-	return res.json();
-};
-
-// Общее число станций жанра — для пагинации и счётчика «станций в эфире».
-export const fetchStationCount = async (genre: string): Promise<number> => {
-	const baseUrl = await resolveBaseUrl();
-
-	const res = await fetch(`${baseUrl}/tags/${encodeURIComponent(genre)}`, {
-		signal: AbortSignal.timeout(8000),
-	});
-
-	if (!res.ok) throw new Error(`radio-browser responded ${res.status}`);
-
-	const tags = (await res.json()) as Array<{ name: string; stationcount: number }>;
-	const exact = tags.find((t) => t.name.toLowerCase() === genre.toLowerCase());
-
-	return exact?.stationcount ?? 0;
-};
-
-// Одна станция по её uuid; null, если не нашлась или отвалилась.
-const fetchStationByUuid = async (baseUrl: string, uuid: string): Promise<unknown> => {
-	try {
-		const res = await fetch(`${baseUrl}/stations/byuuid/${uuid}`, {
-			signal: AbortSignal.timeout(5000),
-		});
-
-		if (!res.ok) return null;
-
-		const data = (await res.json()) as unknown[];
-
-		return data[0] ?? null;
-	} catch {
-		return null;
-	}
-};
-
-// Разворачивает список uuid (из избранного) в полные станции — те, что ещё живы.
-export const fetchStationsByUuids = async (uuids: string[]): Promise<unknown[]> => {
-	if (uuids.length === 0) return [];
-
-	const baseUrl = await resolveBaseUrl();
-	const results = await Promise.all(uuids.map((uuid) => fetchStationByUuid(baseUrl, uuid)));
-
-	return results.filter((s) => s !== null);
+	throw new Error('все зеркала radio-browser недоступны');
 };

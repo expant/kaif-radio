@@ -1,9 +1,5 @@
 import type { FastifyInstance } from 'fastify';
-import {
-	fetchStationsByGenre,
-	fetchStationCount,
-	fetchStationsByUuids,
-} from '../radioBrowser/client.js';
+import { getStationsByGenre, getStationsByUuids } from '../stationStore.js';
 import type { StationsQuery, ByUuidsQuery } from './types.js';
 
 export const stationsRoutes = async (app: FastifyInstance): Promise<void> => {
@@ -14,16 +10,7 @@ export const stationsRoutes = async (app: FastifyInstance): Promise<void> => {
 			return reply.code(400).send({ error: 'genre is required' });
 		}
 
-		try {
-			const [stations, totalCount] = await Promise.all([
-				fetchStationsByGenre(genre, Number(page) || 1),
-				fetchStationCount(genre),
-			]);
-
-			return { stations, totalCount };
-		} catch {
-			return reply.code(502).send({ error: 'station source unavailable' });
-		}
+		return getStationsByGenre(genre, Number(page) || 1);
 	});
 
 	app.get('/stations/by-uuids', async (request, reply) => {
@@ -35,10 +22,6 @@ export const stationsRoutes = async (app: FastifyInstance): Promise<void> => {
 
 		const uuids = ids.split(',').filter(Boolean);
 
-		try {
-			return await fetchStationsByUuids(uuids);
-		} catch {
-			return reply.code(502).send({ error: 'station source unavailable' });
-		}
+		return getStationsByUuids(uuids);
 	});
 };
