@@ -7,5 +7,5 @@ export const redis = new Redis(REDIS_URL, {
 });
 
 redis.on('error', (err: Error) => {
-	console.error('Redis:', err.message);
+	console.error('Redis недоступен:', err.message || err);
 });

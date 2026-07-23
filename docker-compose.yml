@@ -1,34 +1,20 @@
 services:
-  # SPA: собирается Vite'ом с прод-переменными, статику раздаёт nginx на :80.
-  frontend:
-    build:
-      context: ./frontend
-      args:
-        VITE_API_URL: ${VITE_API_URL}
-        VITE_SUPABASE_URL: ${VITE_SUPABASE_URL}
-        VITE_SUPABASE_ANON_KEY: ${VITE_SUPABASE_ANON_KEY}
-    ports:
-      - '80:80'
-    depends_on:
-      - backend
-
   backend:
-    build: ./backend
+    build:
+      context: ./backend
+      target: dev
     ports:
       - '3000:3000'
     environment:
       - PORT=3000
       - REDIS_URL=redis://redis:6379
-    # Монтируем только исходники — hot-reload без пересборки образа.
-    # node_modules остаётся из образа (его не перекрываем).
     volumes:
       - ./backend/src:/app/src
     depends_on:
       - redis
 
-  # Персистентность каталога станций: backend поднимает прошлый каталог из
-  # Redis мгновенно при старте, не дожидаясь сетевой выгрузки.
   redis:
     image: redis:7-alpine
+    # Порт наружу — чтобы можно было заглянуть через redis-cli с хоста.
     ports:
       - '6379:6379'
