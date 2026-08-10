@@ -7,10 +7,10 @@ services:
       - backend
     restart: unless-stopped
 
+  # Порт наружу НЕ публикуем: фронт-nginx проксирует /api на backend по
+  # внутренней сети docker. Снаружи backend доступен только через домен.
   backend:
     image: ghcr.io/expant/kaif-radio-backend:latest
-    ports:
-      - '3000:3000'
     environment:
       - PORT=3000
       - REDIS_URL=redis://redis:6379
