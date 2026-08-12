@@ -43,3 +43,28 @@
 	color: var(--ink-soft);
 	font-weight: 500;
 }
+
+/* ── mobile: в выпадающей панели жанров — строкой во всю ширину ── */
+@media (max-width: 900px) {
+	.addBtn {
+		width: 100%;
+		text-align: left;
+		padding: 15px 16px;
+		border-radius: 14px;
+	}
+
+	.addBtn:hover {
+		transform: none;
+	}
+
+	.form {
+		display: flex;
+		width: 100%;
+	}
+
+	.input {
+		width: 100%;
+		padding: 15px 16px;
+		border-radius: 14px;
+	}
+}

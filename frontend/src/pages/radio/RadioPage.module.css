@@ -165,14 +165,47 @@
 	transform: translateY(-2px);
 }
 
+/* Мобильный мини-плеер главной: на десктопе скрыт (там боковая панель Player). */
+.mobilePlayer {
+	display: none;
+}
+
 /* ── mobile ── */
 @media (max-width: 900px) {
 	.grid {
 		grid-template-columns: 1fr;
 	}
 
+	/* Плеер-док зафиксирован снизу — резервируем под него место по реально
+	   измеренной высоте (--player-h из useDockHeight), иначе низ списка
+	   прячется под доком. Дока нет (ничего не играет) → переменная снята →
+	   фолбэк 0, лишнего места не резервируем. */
 	main {
-		padding-bottom: 220px;
+		padding-bottom: calc(var(--player-h, 0px) + 24px);
+	}
+
+	/* Компактный топбар: лого и управление в одну строку. */
+	.header {
+		flex-wrap: nowrap;
+		align-items: center;
+		gap: 16px;
+		margin-bottom: 24px;
+	}
+
+	.brand {
+		min-width: 0;
+	}
+
+	.wordmark {
+		font-size: clamp(32px, 10vw, 44px);
+	}
+
+	.tagline {
+		margin-top: 6px;
+	}
+
+	.mobilePlayer {
+		display: block;
 	}
 }
 

@@ -125,12 +125,26 @@
 
 .email {
 	margin-top: 8px;
-	display: inline-flex;
+	display: flex;
 	align-items: center;
 	gap: 8px;
+	max-width: 100%;
 	font-size: 15px;
 	font-weight: 500;
 	color: var(--ink-soft);
+}
+
+/* Иконка не сжимается, длинный email обрезается многоточием, а не вылезает
+   за карточку (иначе тянет всю страницу по горизонтали). */
+.email svg {
+	flex-shrink: 0;
+}
+
+.email span {
+	min-width: 0;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
 }
 
 .editBtn {
@@ -239,4 +253,26 @@
 	font-weight: 500;
 	color: var(--ink-soft);
 	margin-top: 2px;
+}
+
+/* ── mobile ── */
+@media (max-width: 900px) {
+	.hero {
+		gap: 18px;
+		padding: 20px;
+	}
+
+	.avatar {
+		width: 72px;
+		height: 72px;
+		border-radius: 20px;
+		font-size: 36px;
+	}
+
+	/* Кнопка «изменить имя» — отдельной строкой во всю ширину под инфо. */
+	.editBtn {
+		width: 100%;
+		margin-left: 0;
+		justify-content: center;
+	}
 }

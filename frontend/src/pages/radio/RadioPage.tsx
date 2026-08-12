@@ -3,6 +3,7 @@ import { GenreTags } from '../../features/genre-filter/ui/GenreTags/GenreTags';
 import { AddGenreForm } from '../../features/genre-filter/ui/AddGenreForm/AddGenreForm';
 import { StationList } from '../../widgets/station-list/ui/StationList/StationList';
 import { Player } from '../../widgets/player/ui/Player/Player';
+import { MiniPlayer } from '../../widgets/player/ui/MiniPlayer/MiniPlayer';
 import { Pagination } from '../../features/station-pagination/ui/Pagination/Pagination';
 import { Toast } from '../../shared/ui/Toast/Toast';
 import { UserControls } from '../../widgets/user-controls/ui/UserControls';
@@ -107,6 +108,11 @@ export const RadioPage = () => {
 				</main>
 
 				<Player player={player} accentColor={accentColor} />
+			</div>
+
+			{/* На десктопе главной играет боковая панель Player, мини-док только на мобилке. */}
+			<div className={styles.mobilePlayer}>
+				<MiniPlayer />
 			</div>
 		</div>
 	);

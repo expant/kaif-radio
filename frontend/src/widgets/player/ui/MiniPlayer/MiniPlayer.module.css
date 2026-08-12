@@ -56,7 +56,7 @@
 	text-overflow: ellipsis;
 }
 
-/* ── вид фичевых контролов (play/pause + громкость) — через переменные ── */
+/* ── вид кнопки play/pause — через переменные ── */
 .dock {
 	--pp-size: 44px;
 	--pp-bg: var(--accent, var(--coral));
@@ -64,24 +64,6 @@
 	--pp-border: 2px solid var(--ink);
 	--pp-shadow: 0 4px 0 rgba(0, 0, 0, 0.22);
 	--pp-shadow-active: 0 1px 0 rgba(0, 0, 0, 0.22);
-
-	--vol-gap: 8px;
-	--vol-flex: 0 0 auto;
-	--vol-input-flex: 0 0 auto;
-	--vol-width: 84px;
-	--vol-color: var(--ink-soft);
-	--vol-track-h: 6px;
-	--vol-track-bg: var(--line);
-	--vol-thumb: 16px;
-	--vol-thumb-bg: var(--accent, var(--coral));
-	--vol-thumb-border: 2px solid var(--ink);
-}
-
-/* ── mobile: громкость прячем, оставляем суть ── */
-@media (max-width: 560px) {
-	.dock {
-		--vol-display: none;
-	}
 }
 
 @keyframes dockIn {
