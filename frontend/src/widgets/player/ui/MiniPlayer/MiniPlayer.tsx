@@ -1,24 +1,29 @@
 import type { CSSProperties } from 'react';
 import { usePlayer } from '@/features/playback/model/hooks/usePlayer';
 import { PlayPauseButton } from '@/features/playback/ui/PlayPauseButton/PlayPauseButton';
-import { VolumeControl } from '@/features/playback/ui/VolumeControl/VolumeControl';
 import { StationAvatar } from '@/shared/ui/StationAvatar/StationAvatar';
 import { FavoriteButton } from '@/features/favorites/ui/FavoriteButton';
 import { getStatusText } from '@/features/playback/model/statusText';
+import { useMiniPlayerHeight } from '@/widgets/player/model/hooks/useMiniPlayerHeight';
 import styles from './MiniPlayer.module.css';
 
 export const MiniPlayer = () => {
-	const { currentStation, status, playError, accentColor, genre } = usePlayer();
+	const { currentStation, status, playError, accentColor } = usePlayer();
+
+	const miniPlayerRef = useMiniPlayerHeight<HTMLDivElement>();
 
 	if (!currentStation) return null;
 
-	const accent = accentColor;
-	const sub = getStatusText({ status, playError, detail: genre });
+	const sub = getStatusText({ status, playError, detail: currentStation.country });
 
 	return (
-		<div className={styles.dock} style={{ '--accent': accent } as CSSProperties}>
+		<div ref={miniPlayerRef} className={styles.dock} style={{ '--accent': accentColor } as CSSProperties}>
 			<div className={styles.avatar}>
-				<StationAvatar name={currentStation.name} favicon={currentStation.favicon} color={accent} />
+				<StationAvatar
+					name={currentStation.name}
+					favicon={currentStation.favicon}
+					color={accentColor}
+				/>
 			</div>
 
 			<div className={styles.info}>
@@ -31,8 +36,6 @@ export const MiniPlayer = () => {
 			<FavoriteButton station={currentStation} />
 
 			<PlayPauseButton size={22} />
-
-			<VolumeControl size={18} />
 		</div>
 	);
 };
