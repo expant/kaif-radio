@@ -178,6 +178,26 @@
 	main {
 		padding-bottom: calc(var(--player-h, 0px) + 24px);
 	}
+
+	/* Компактный топбар: лого и управление в одну строку. */
+	.header {
+		flex-wrap: nowrap;
+		align-items: center;
+		gap: 16px;
+		margin-bottom: 24px;
+	}
+
+	.brand {
+		min-width: 0;
+	}
+
+	.wordmark {
+		font-size: clamp(32px, 10vw, 44px);
+	}
+
+	.tagline {
+		margin-top: 6px;
+	}
 }
 
 @keyframes pulse {

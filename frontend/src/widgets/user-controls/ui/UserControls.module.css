@@ -104,3 +104,33 @@
 .chip:hover .profileLink {
 	color: var(--coral);
 }
+
+/* ── mobile: профиль — только аватар, без подписей и обёртки-пилюли ── */
+@media (max-width: 900px) {
+	.controls {
+		gap: 10px;
+	}
+
+	.chip {
+		padding: 0;
+		gap: 0;
+		border: none;
+		background: transparent;
+		box-shadow: none;
+		border-radius: 50%;
+	}
+
+	.chip:hover {
+		transform: translateY(-2px);
+		box-shadow: none;
+		background: transparent;
+	}
+
+	.chip:active {
+		transform: translateY(0);
+	}
+
+	.userText {
+		display: none;
+	}
+}
