@@ -40,7 +40,7 @@ export const StationItem = ({
 			<div className={styles.metaMain}>
 				<div className={styles.rname}>{station.name}</div>
 				<div className={styles.rmeta}>
-					{station.country && <span>{station.country}</span>}
+					{station.country && <span className={styles.country}>{station.country}</span>}
 					{station.country && station.bitrate > 0 && <span className={styles.dot} />}
 					{station.bitrate > 0 && <span className={styles.kbps}>{station.bitrate} kbps</span>}
 				</div>

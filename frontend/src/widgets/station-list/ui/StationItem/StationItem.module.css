@@ -159,3 +159,44 @@
 	border-color: var(--rc);
 	color: #fff;
 }
+
+/* ── mobile ── */
+@media (max-width: 900px) {
+	.row {
+		grid-template-columns: auto 1fr auto auto;
+		gap: 12px;
+		padding: 12px 14px;
+		border-radius: 18px;
+	}
+
+	.tile {
+		width: 46px;
+		height: 46px;
+		border-radius: 12px;
+		font-size: 20px;
+	}
+
+	.rname {
+		font-size: 16px;
+	}
+
+	.rmeta {
+		flex-wrap: nowrap;
+		margin-top: 3px;
+	}
+
+	/* Страна — в одну строку с многоточием, а не переносами по слову. */
+	.country {
+		min-width: 0;
+		overflow: hidden;
+		text-overflow: ellipsis;
+		white-space: nowrap;
+	}
+
+	/* Битрейт и счётчик слушателей прячем — вторичны и не влезают по ширине. */
+	.kbps,
+	.dot,
+	.votes {
+		display: none;
+	}
+}
