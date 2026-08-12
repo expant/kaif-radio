@@ -110,7 +110,10 @@ export const RadioPage = () => {
 				<Player player={player} accentColor={accentColor} />
 			</div>
 
-			<MiniPlayer />
+			{/* На десктопе главной играет боковая панель Player, мини-док только на мобилке. */}
+			<div className={styles.mobilePlayer}>
+				<MiniPlayer />
+			</div>
 		</div>
 	);
 };

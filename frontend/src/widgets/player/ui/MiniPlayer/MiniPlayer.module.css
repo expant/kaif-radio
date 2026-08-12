@@ -66,13 +66,6 @@
 	--pp-shadow-active: 0 1px 0 rgba(0, 0, 0, 0.22);
 }
 
-/* Док — только мобильный: на десктопе показывается полный Player в сайдбаре. */
-@media (min-width: 901px) {
-	.dock {
-		display: none;
-	}
-}
-
 @keyframes dockIn {
 	from {
 		opacity: 0;
