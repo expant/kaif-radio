@@ -1,0 +1,9 @@
+# HTTPS терминируется здесь (автоматический Let's Encrypt), трафик уходит на
+# фронт-nginx по внутренней сети docker. www редиректит на основной домен.
+kaif-radio.ru {
+	reverse_proxy frontend:80
+}
+
+www.kaif-radio.ru {
+	redir https://kaif-radio.ru{uri}
+}

@@ -1,14 +1,28 @@
 services:
-  frontend:
-    image: ghcr.io/expant/kaif-radio-frontend:latest
+  # Caddy — единственная точка входа снаружи: терминирует HTTPS (автоматический
+  # Let's Encrypt) и проксирует на фронт-nginx по внутренней сети docker.
+  # Фронт спрятан за Caddy и наружу порты не публикует.
+  caddy:
+    image: caddy:2-alpine
     ports:
       - '80:80'
+      - '443:443'
+    volumes:
+      - ./Caddyfile:/etc/caddy/Caddyfile:ro
+      - caddy-data:/data
+      - caddy-config:/config
+    depends_on:
+      - frontend
+    restart: unless-stopped
+
+  frontend:
+    image: ghcr.io/expant/kaif-radio-frontend:latest
     depends_on:
       - backend
     restart: unless-stopped
 
   # Порт наружу НЕ публикуем: фронт-nginx проксирует /api на backend по
-  # внутренней сети docker. Снаружи backend доступен только через домен.
+  # внутренней сети docker.
   backend:
     image: ghcr.io/expant/kaif-radio-backend:latest
     environment:
@@ -24,6 +38,8 @@ services:
     volumes:
       - redis-data:/data
 
-# Именованный том: каталог станций переживает пересоздание контейнера.
+# Именованные тома: каталог станций и сертификаты Caddy переживают пересоздание.
 volumes:
   redis-data:
+  caddy-data:
+  caddy-config:
