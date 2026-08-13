@@ -5,6 +5,8 @@ import { useLogout } from '@/features/auth/logout/model/hooks/useLogout';
 export const useProfilePage = () => {
 	const { session } = useAuth();
 	const [editOpen, setEditOpen] = useState(false);
+	const [passwordOpen, setPasswordOpen] = useState(false);
+	const [notice, setNotice] = useState<string | null>(null);
 	const { handleLogout } = useLogout();
 
 	const username = session?.user.user_metadata?.username as string | undefined;
@@ -18,6 +20,15 @@ export const useProfilePage = () => {
 		editOpen,
 		openEdit: () => setEditOpen(true),
 		closeEdit: () => setEditOpen(false),
+		passwordOpen,
+		openPassword: () => setPasswordOpen(true),
+		closePassword: () => setPasswordOpen(false),
+		onPasswordChanged: () => {
+			setPasswordOpen(false);
+			setNotice('пароль изменён');
+		},
+		notice,
+		clearNotice: () => setNotice(null),
 		handleLogout,
 	};
 };
