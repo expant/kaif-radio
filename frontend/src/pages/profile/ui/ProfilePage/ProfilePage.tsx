@@ -92,7 +92,7 @@ export const ProfilePage = () => {
 			{editOpen && <UpdateUsernameModal currentUsername={username} onClose={closeEdit} />}
 			{passwordOpen && <UpdatePasswordModal onClose={closePassword} onSuccess={onPasswordChanged} />}
 
-			{notice && <Toast message={notice} onClose={clearNotice} />}
+			{notice && <Toast message={notice} onClose={clearNotice} variant="success" />}
 		</div>
 	);
 };
