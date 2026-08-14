@@ -1,15 +1,31 @@
 import { Link } from 'react-router';
 import { useProfilePage } from '../../model/hooks/useProfilePage';
 import { UpdateUsernameModal } from '@/features/auth/update-username/ui/UpdateUsernameModal';
+import { UpdatePasswordModal } from '@/features/auth/update-password/ui/UpdatePasswordModal';
 import { IconEdit } from '@/shared/ui/icons/IconEdit';
 import { IconMail } from '@/shared/ui/icons/IconMail';
+import { IconLock } from '@/shared/ui/icons/IconLock';
 import { IconLogout } from '@/shared/ui/icons/IconLogout';
 import { IconChevron } from '@/shared/ui/icons/IconChevron';
+import { Toast } from '@/shared/ui/Toast/Toast';
 import styles from './ProfilePage.module.css';
 
 export const ProfilePage = () => {
-	const { username, email, initial, editOpen, openEdit, closeEdit, handleLogout } =
-		useProfilePage();
+	const {
+		username,
+		email,
+		initial,
+		editOpen,
+		openEdit,
+		closeEdit,
+		passwordOpen,
+		openPassword,
+		closePassword,
+		onPasswordChanged,
+		notice,
+		clearNotice,
+		handleLogout,
+	} = useProfilePage();
 
 	return (
 		<div className={styles.shell}>
@@ -49,6 +65,17 @@ export const ProfilePage = () => {
 			<div className={styles.section}>
 				<div className={styles.secTitle}>аккаунт</div>
 				<div className={styles.panel}>
+					<div className={styles.row} onClick={openPassword}>
+						<div className={styles.rowIco}>
+							<IconLock size={20} />
+						</div>
+						<div className={styles.rowBody}>
+							<div className={styles.rowTitle}>сменить пароль</div>
+							<div className={styles.rowSub}>обновить пароль для входа</div>
+						</div>
+						<IconChevron size={20} />
+					</div>
+
 					<div className={`${styles.row} ${styles.danger}`} onClick={handleLogout}>
 						<div className={styles.rowIco}>
 							<IconLogout size={20} />
@@ -63,6 +90,9 @@ export const ProfilePage = () => {
 			</div>
 
 			{editOpen && <UpdateUsernameModal currentUsername={username} onClose={closeEdit} />}
+			{passwordOpen && <UpdatePasswordModal onClose={closePassword} onSuccess={onPasswordChanged} />}
+
+			{notice && <Toast message={notice} onClose={clearNotice} variant="success" />}
 		</div>
 	);
 };

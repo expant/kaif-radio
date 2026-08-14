@@ -211,6 +211,10 @@
 	transition: background 0.14s ease;
 }
 
+.row + .row {
+	border-top: 1.5px solid var(--line);
+}
+
 .row:hover {
 	background: var(--paper);
 }

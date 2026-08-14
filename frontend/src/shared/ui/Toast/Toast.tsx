@@ -6,7 +6,7 @@ import styles from './Toast.module.css';
 const VISIBLE_DURATION = 3000;
 const EXIT_DURATION = 300;
 
-export const Toast = ({ message, onClose }: ToastProps) => {
+export const Toast = ({ message, onClose, variant = 'default' }: ToastProps) => {
 	const [exiting, setExiting] = useState(false);
 
 	useEffect(() => {
@@ -24,7 +24,11 @@ export const Toast = ({ message, onClose }: ToastProps) => {
 	}, [exiting, onClose]);
 
 	return createPortal(
-		<div className={`${styles.toast} ${exiting ? styles.exit : styles.enter}`}>
+		<div
+			className={`${styles.toast} ${variant === 'success' ? styles.success : ''} ${
+				exiting ? styles.exit : styles.enter
+			}`}
+		>
 			<span className={styles.dot} />
 			{message}
 		</div>,
